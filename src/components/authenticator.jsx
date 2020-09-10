@@ -4,11 +4,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import Login from './pages/2-login'
 import {
   requestValidate,
+  logout,
 } from '../redux/actions'
 
 const Authenticator = () => {
   const dispatch = useDispatch()
   const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
+
+  const doLogout = () => {
+    dispatch(logout())
+  }
 
   useEffect(() => {
     dispatch(requestValidate())
@@ -42,6 +47,7 @@ const Authenticator = () => {
   return (
     <div>
       Autenticado
+      <button onClick={doLogout}>LOGOUT</button>
       {/*  <Switch>
               <Route path="/prateleiras">
                   <Prateleiras />

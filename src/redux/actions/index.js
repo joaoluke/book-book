@@ -14,10 +14,10 @@ export const login = (token, user) => ({
 export const logout = () => (dispatch) => {
   localStorage.clear();
   dispatch({ type: LOGOUT });
+  dispatch(setAuthenticationFalse())
 };
 
 export const requestLogin = (user, password) => (dispatch) => {
-  debugger
   axios.post("https://ka-users-api.herokuapp.com/authenticate", { user, password })
     .then((res) => {
       dispatch(login(res.data.auth_token, res.data.user))
