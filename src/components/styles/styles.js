@@ -1,6 +1,10 @@
 import styled from "styled-components";
-
+import { Input, Typography, Card } from "antd";
 import { List } from "antd";
+
+
+const { Search } = Input;
+const { Title } = Typography;
 
 export const ListAntd = styled(List)`
   background-color: white;
@@ -55,3 +59,22 @@ export const Header = styled.header`
     padding-left: 20%;
   }
 `;
+
+export const StyledH1 = styled(Title)`
+  color: #0b0754;
+`;
+
+export const StyledBodySearch = styled.div`
+  width: 800px;
+  margin: 100px auto;
+`;
+
+export const StyledInputSearch = styled(Search)`
+  margin-top: 30px;
+  width: 500px;
+`;
+
+export const StyledCardSearch = styled(Card)`
+  margin: 60px auto;
+`;
+

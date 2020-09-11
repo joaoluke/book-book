@@ -3,6 +3,7 @@ import { Switch, Route, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Timeline from './pages/5-timeline'
 import Login from './pages/2-login'
+import Busca from './pages/4-busca'
 import Header from './header'
 import {
   requestValidate,
@@ -17,6 +18,14 @@ const Authenticator = () => {
   const doLogout = () => {
     dispatch(logout())
     history.push('/')
+  }
+
+  const doBusca = () => {
+    history.push('/busca')
+  }
+
+  const doTimeline = () => {
+    history.push('/timeline')
   }
 
   useEffect(() => {
@@ -53,14 +62,16 @@ const Authenticator = () => {
     <div>
       Autenticado
       <button onClick={doLogout}>LOGOUT</button>
+      <button onClick={doBusca}>BUSCA</button>
+      <button onClick={doTimeline}>TIMELINE</button>
       <Switch>
         {/* <Route path="/prateleiras">
                   <Prateleiras />
-              </Route>
+              </Route> */}
 
-            <Route path="/busca">
-                <Busca />
-            </Route>  */}
+        <Route path="/busca">
+          <Busca />
+        </Route>
 
         <Route path="/timeline/">
           <Header />
