@@ -1,7 +1,9 @@
 import React, { useEffect } from "react"
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import Timeline from './pages/5-timeline'
 import Login from './pages/2-login'
+import Header from './header'
 import {
   requestValidate,
   logout,
@@ -9,10 +11,12 @@ import {
 
 const Authenticator = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
 
   const doLogout = () => {
     dispatch(logout())
+    history.push('/')
   }
 
   useEffect(() => {
@@ -29,6 +33,7 @@ const Authenticator = () => {
         Não autenticado
         <Switch>
           <Route path="/">
+            <Header />
             <Login />
           </Route>
         </Switch>
@@ -48,20 +53,23 @@ const Authenticator = () => {
     <div>
       Autenticado
       <button onClick={doLogout}>LOGOUT</button>
-      {/*  <Switch>
-              <Route path="/prateleiras">
+      <Switch>
+        {/* <Route path="/prateleiras">
                   <Prateleiras />
               </Route>
 
             <Route path="/busca">
                 <Busca />
-            </Route>
+            </Route>  */}
 
-            <Route path="/timeline/"> 
-                <Timeline />
-            </Route>
+        <Route path="/timeline/">
+          <Header />
+          <Timeline />
 
-        </Switch> */}
+
+        </Route>
+
+      </Switch>
     </div>
   )
 }

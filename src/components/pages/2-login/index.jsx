@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { Form, Input, Button, Checkbox } from 'antd';
 //import { StyledForm, StyledDiv, StyledRespDiv } from '../../styled/styledform/index.js'
@@ -15,10 +16,12 @@ const tailLayout = {
 
 const Login = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
 
   const onFinish = ({ user, password }) => {
     dispatch(requestLogin(user, password))
+    history.push('/timeline')
   };
 
   const onFinishFailed = errorInfo => {

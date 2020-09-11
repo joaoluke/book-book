@@ -5,6 +5,7 @@ export const TRUE = 'TRUE'
 export const FALSE = 'FALSE'
 export const LOADING = 'LOADING'
 
+
 export const login = (token, user) => ({
   type: LOGIN,
   token,
