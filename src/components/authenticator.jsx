@@ -1,16 +1,36 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Timeline from './pages/5-timeline'
-import Login from './pages/2-login'
+import WindowInitial from './pages/2-login'
+import Registration from './pages/1-registration'
 import Busca from './pages/4-busca'
 import Header from './header'
 import {
   requestValidate,
   logout,
 } from '../redux/actions'
+import 'antd/dist/antd.css';
+import logo from "../images/books-login.svg";
+import { Modal, Button } from "antd";
 
 const Authenticator = () => {
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const handleOk = e => {
+    console.log(e);
+    setVisible(false);
+  };
+
+  const handleCancel = e => {
+    console.log(e);
+    setVisible(false);
+  };
+
   const dispatch = useDispatch()
   const history = useHistory()
   const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
@@ -38,23 +58,28 @@ const Authenticator = () => {
 
   if (authenticate === false)
     return (
-      <div>
-        Não autenticado
+      <div className="App">
         <Switch>
           <Route path="/">
-            <Header />
-            <Login />
+            <header className="Bookbook">BookBook</header>
+            <div className="Logo">
+              <img src={logo} alt="logo" />
+            </div>
+            <div className="Login">
+              <h1 className="Slogan">Descubra um mundo <br />de livros</h1>
+              <WindowInitial />
+              <p>Ou <a onClick={showModal}>registre-se agora</a></p>
+            </div>
+            <Modal
+              title="Cadastro"
+              visible={visible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              <Registration />
+            </Modal>
           </Route>
         </Switch>
-
-        {/*  <Route path="/register">
-                <Register />
-              </Route> */}
-
-        {/* <Route path="/">
-                  <Home />
-              </Route> */}
-
       </div>
     )
 
