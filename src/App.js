@@ -1,12 +1,14 @@
 import React, {useState} from "react";
 import "./App.css";
-import 'antd/dist/antd.css';
-import {  Modal, Button  } from "antd"; 
+import Authenticator from './components/authenticator.jsx'
+import { createGlobalStyle } from "styled-components";
 
-import logo from  "./images/books-login.svg";
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #F3F8FF;
+  }
+`;
 
-import WindowInitial from "./components/pages/2-login";
-import Registration from "./components/pages/1-registration"
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -27,23 +29,8 @@ function App() {
 
   return (
     <div className="App">
-      <header className="Bookbook">BookBook</header>
-      <div className="Logo">
-        <img src={logo} />
-      </div>
-      <div className="Login">
-        <h1 className="Slogan">Descubra um mundo <br/>de livros</h1>
-        <WindowInitial />
-        <p>Ou <a onClick={showModal}>registre-se agora</a></p>
-       </div>
-      <Modal
-          title="Cadastro"
-          visible={visible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <Registration />
-        </Modal>
+      <GlobalStyle />
+      <Authenticator />
     </div>
   );
 }

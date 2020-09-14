@@ -12,7 +12,7 @@ import {
 } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { residences } from "./residence.js";
-import { useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 const { Option } = Select;
@@ -49,7 +49,7 @@ const tailFormItemLayout = {
   },
 };
 
-const RegistrationForm = () => {
+const Registration = () => {
   const [form] = Form.useForm();
   // agreement: true
   // prefix: "55"
@@ -68,12 +68,12 @@ const RegistrationForm = () => {
         "cellphone": values.phone,
       }
     })
-    .then(()=>{
-      alert("user criado com sucesso")
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .then(() => {
+        alert("user criado com sucesso")
+      })
+      .catch(error => {
+        console.log(error)
+      })
   };
 
   const prefixSelector = (
@@ -108,7 +108,7 @@ const RegistrationForm = () => {
       name="register"
       onFinish={onFinish}
       initialValues={{
-        residence: ['Estado','Paraná', 'Curitiba'],
+        residence: ['Estado', 'Paraná', 'Curitiba'],
         prefix: '55',
       }}
       scrollToFirstError
@@ -259,4 +259,4 @@ const RegistrationForm = () => {
 };
 
 
-export default RegistrationForm;
+export default Registration;

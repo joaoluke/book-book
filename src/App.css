@@ -35,9 +35,76 @@ header {
   grid-area: book;
 }
 
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* PARTE DO JOÃO */
+
+body {
+  background-color: #F3F8FF;
+}
+
+.Bookbook {
+  position: absolute;
+  width: 82%;
+  height: 34px;
+  left: 10%;
+  top: 29px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: rgba(124, 154, 242, 0.85);
+}
+
+
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-areas: 'header header' 'book login';
+  /*CONFLITO*/
+}
+
+
+
+header {
+  grid-area: header;
+  margin: 2rem auto auto 2rem;
+  font-size: 30px;
+}
+
+.Logo {
+  grid-area: book;
+}
+
 .Logo img {
-  height: 30rem;
-  width: 30rem;
+  height: 400px;
+  width: 400px;
   margin: 25% auto;
 }
 
@@ -74,3 +141,4 @@ Registration {
   width: 100%;
   position: absolute;
 }
+
