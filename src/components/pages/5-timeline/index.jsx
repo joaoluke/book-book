@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
-import { Div } from "../../styles/styles";
-import { ListAntd } from "../../styles/styles";
 import { Avatar, Space } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
+import {
+  Div,
+  ListAntd,
+  StyledCardTimeline,
+  StyledTimelineCardTopText,
+  StyledTimelineImg,
+  StyledTimelineCardTitle,
+  StyledTimelineCardSubtitle,
+  StyledTimelineButton,
+  StyledTimelineCardUserContainer,
+  StyledTimelineCardUser,
+  StyledTimelineCardAvatar,
+  StyledTimelineAuthor,
+} from "../../styles/styles";
 
 
 const IconText = ({ icon, text }) => (
@@ -17,25 +29,35 @@ const IconText = ({ icon, text }) => (
 const Timeline = () => {
   const [listData, setData] = useState([]);
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
+  const token = window.localStorage.getItem("authToken")
+  const [searchBook, setSearchBook] = useState("javascript");
+  const [book, setBook] = useState([]);
+  const addPrateleira = () => {
+    "dispatch livro - adicionar o livro na api! "
+  }
+
 
   useEffect(() => {
     axios
       .get(url,
-        { headers: { Authorization: "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5OTgsImV4cCI6MTYzMTIxMDE3NH0.YKpX8EiI9qVJyEG05hAUM9UdRqVy6EYYa8nyCPA2X6M" } }
+        { headers: { Authorization: token } }
       )
       .then(resp => {
         console.log("title: " + resp.data[1].title)
         console.log("review: " + resp.data[1].review)
         console.log("url: " + resp.data[1].image_url)
         setData(resp.data)
+        console.log(resp.data[0].creator.name[0])
+        console.log(resp.data)
       })
       .catch((error) => { // erro no request
         console.log(error)
       })
-  }, [])
+  }, [token])
+  // Remover list data: loop infinito
 
   return (
-    <Div>
+    < Div >
       <h1>Olá User,</h1>
       <p>Timeline</p>
       <div>
@@ -45,8 +67,9 @@ const Timeline = () => {
           pagination={{
             onChange: (page) => {
               console.log(page);
+              console.log(listData)
             },
-            pageSize: 3,
+            pageSize: 5,
           }}
           dataSource={listData}
           footer={
@@ -54,9 +77,36 @@ const Timeline = () => {
               <b>ant design</b> footer part
             </div>
           }
-          renderItem={(item) => (
-            <ListAntd.Item
-              key={item.title}
+          renderItem={(item) => {
+            console.log(item)
+            return (
+              <ListAntd.Item>
+                <StyledCardTimeline>
+                  <StyledTimelineCardUserContainer>
+                    {item.creator.image_url ?
+                      <StyledTimelineCardAvatar> {item.creator.image_url}</StyledTimelineCardAvatar> :
+                      <StyledTimelineCardAvatar> {item.creator.name[0].toUpperCase()} </StyledTimelineCardAvatar>}
+                    <StyledTimelineCardUser>{item.creator.name}</StyledTimelineCardUser>
+                  </StyledTimelineCardUserContainer>
+                  <StyledTimelineCardTopText>
+                    <StyledTimelineAuthor>Este livro foi escrito por: {item.author}</StyledTimelineAuthor>
+                    {item.grade ? <div>Avaliação: {item.grade}/5</div> : <div>Não Avaliado</div>}
+                  </StyledTimelineCardTopText>
+                  <StyledTimelineImg src={item.image_url} />
+                  <StyledTimelineCardTitle>
+                    <span>
+                      {item.title}
+                    </span>
+                  </StyledTimelineCardTitle>
+                  {item.categories ? <StyledTimelineCardSubtitle> Categoria: {item.categories} </StyledTimelineCardSubtitle> :
+                    <StyledTimelineCardSubtitle> Categoria: Não informado </StyledTimelineCardSubtitle>}
+
+
+                  <StyledTimelineButton onClick={addPrateleira}> Adicionar à Prateleira</StyledTimelineButton>
+                </StyledCardTimeline>
+              </ListAntd.Item>
+
+              /*key={item.title}
               actions={[
                 <IconText
                   icon={StarOutlined}
@@ -89,11 +139,12 @@ const Timeline = () => {
                 description={item.review ? item.review : "Este livro ainda não tem uma avaliação"}
               />
               {item.content}
-            </ListAntd.Item>
-          )}
+            </ListAntd.Item>*/
+            )
+          }}
         />
       </div>
-    </Div>
+    </Div >
   );
 };
 

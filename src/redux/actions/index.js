@@ -4,7 +4,7 @@ export const LOGOUT = 'LOGOUT'
 export const TRUE = 'TRUE'
 export const FALSE = 'FALSE'
 export const LOADING = 'LOADING'
-
+export const SETLIST = 'SETLIST'
 
 export const login = (token, user) => ({
   type: LOGIN,
@@ -46,7 +46,6 @@ export const requestValidate = () => (dispatch) => {
     .catch(() => setAuthenticationFalse())
 }
 
-
 export const setAuthenticationFalse = () => ({
   type: FALSE
 });
@@ -54,5 +53,6 @@ export const setAuthenticationFalse = () => ({
 export const setAuthenticationTrue = () => ({
   type: TRUE
 });
+
 
 
