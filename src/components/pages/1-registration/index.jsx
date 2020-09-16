@@ -85,8 +85,7 @@ const Registration = ({ setVisible }) => {
         "image_url": values.image,
         "password": values.password,
         "password_confirmation": values.confirm,
-        "address": values.residence[0],
-        "cellphone": values.phone,
+        "address": values.residence[2],
       }
     })
     .then(() => {

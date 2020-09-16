@@ -110,12 +110,7 @@ export default function useBookSearch ()  {
 
                   return (
                     <div>
-                    <ListAntd.Item.Meta
-                  
-                      avatar={<Avatar src={book.creator.image_url} />}
-                      title={<a href={book.href}>{book.title}</a>}
-                      description={book.review ? book.review : "Este livro ainda não tem uma avaliação"}
-                    />
+                    
                     </div>
                   )
                   }
