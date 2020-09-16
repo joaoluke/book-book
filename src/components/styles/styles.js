@@ -33,7 +33,7 @@ export const LoginHeader = styled.header`
 `;
 
 
-export const LoginButton = styled(Button)`
+export const LoginButton = styled.button`
   width: 400px;
   background-color: #4951EC;
   color: #fff;
