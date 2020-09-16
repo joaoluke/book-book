@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import { Avatar, Space } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import {
   Div,
   ListAntd,
@@ -27,6 +28,12 @@ const IconText = ({ icon, text }) => (
 );
 
 const Timeline = () => {
+  const getUser = useSelector((state) => state.session.user.user)
+  const getId = useSelector((state) => state.session.user.id)
+  const getToken = useSelector((state) => state.session.token)
+  console.log(getUser)
+  console.log(getId)
+  console.log(getToken)
   const [listData, setData] = useState([]);
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
   const token = window.localStorage.getItem("authToken")
@@ -40,7 +47,7 @@ const Timeline = () => {
   useEffect(() => {
     axios
       .get(url,
-        { headers: { Authorization: token } }
+        { headers: { Authorization: getToken } }
       )
       .then(resp => {
         console.log("title: " + resp.data[1].title)
@@ -53,7 +60,7 @@ const Timeline = () => {
       .catch((error) => { // erro no request
         console.log(error)
       })
-  }, [token])
+  }, [getToken, token])
   // Remover list data: loop infinito
 
   return (
@@ -94,9 +101,9 @@ const Timeline = () => {
                   </StyledTimelineCardTopText>
                   <StyledTimelineImg src={item.image_url} />
                   <StyledTimelineCardTitle>
-                    <span>
+                    <h2>
                       {item.title}
-                    </span>
+                    </h2>
                   </StyledTimelineCardTitle>
                   {item.categories ? <StyledTimelineCardSubtitle> Categoria: {item.categories} </StyledTimelineCardSubtitle> :
                     <StyledTimelineCardSubtitle> Categoria: Não informado </StyledTimelineCardSubtitle>}

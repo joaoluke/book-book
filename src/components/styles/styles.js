@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Input, Typography, Card } from "antd";
-import { List } from "antd";
+import { List, Form } from "antd";
 
 
 const { Search } = Input;
@@ -87,13 +87,13 @@ position: relative;
 left: 50px;
 margin: 0px;
 padding: 5px;
-border: 5px solid black;
+/* border: 5px solid black; */
 `
 export const StyledTimelineCardUserContainer = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
-border: solid 2px blue;
+/* border: solid 2px blue; */
 margin-bottom: 5px;
 `
 
@@ -104,7 +104,10 @@ width: 30px;
 height: 30px;
 border-radius: 15px;
 color: white;
-text-align: center;
+display: flex;
+align-items: center;
+justify-content:center;
+
 `
 
 export const StyledTimelineCardUser = styled.div`
@@ -114,31 +117,35 @@ padding-left: 5px;
 export const StyledTimelineCardTopText = styled.div`
 display: flex;
 justify-content:space-between;
-border: solid 2px blue;
+/* border: solid 2px blue; */
 `
 
 export const StyledTimelineAuthor = styled.div`
 width: 300px;
 font-size: 1.5rem;
 color: blue;
-border: solid 2px blue;
+/* border: solid 2px blue; */
 `
 
 export const StyledTimelineImg = styled.img`
 margin-top: 10px;
-width: 272;
+max-width: 272px;
+max-height:300px;
 alt: "logo";
 `
 
 export const StyledTimelineCardTitle = styled.div`
-font-family: Poppins;
-font-size: 2rem;
-color: #888;
+
 /* display: flex;
 justify-content: flex-start; */
-border: 1px solid green;
-span { 
-  margin-left: 100px;
+/* border: 1px solid green; */
+h2 { 
+  font-family: Poppins;
+  font-size: 2rem;
+  color: #888;
+  text-align: justify;
+  margin-left: 60px;
+  width: 270px
 }
 `
 
@@ -146,7 +153,7 @@ export const StyledTimelineCardSubtitle = styled.div`
 font-family: Poppins;
 font-size: 1.5rem;
 color: #888;
-border: solid 2px blue;
+/* border: solid 2px blue; */
 `
 
 export const StyledTimelineButton = styled.button`
@@ -154,9 +161,8 @@ color:blue;
 padding: 0px 5px;
 position: absolute;
 top: 93%;
-left: 32%
+left: 32%;
 `
 
-/* TODO:
-CENTRALIZAR A INICIAL DO Avatar
-ajustar/ alinhar os textos */
+export const StyledForm = styled(Form)`
+top: -50px`

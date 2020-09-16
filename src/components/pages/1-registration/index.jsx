@@ -14,6 +14,7 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import { residences } from "./residence.js";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { StyledForm } from '../../styles/styles'
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
@@ -102,7 +103,7 @@ const Registration = () => {
     value: website,
   }));
   return (
-    <Form
+    <StyledForm
       {...formItemLayout}
       form={form}
       name="register"
@@ -254,7 +255,7 @@ const Registration = () => {
           Register
         </Button>
       </Form.Item>
-    </Form>
+    </StyledForm>
   );
 };
 
