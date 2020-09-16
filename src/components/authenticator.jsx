@@ -13,6 +13,12 @@ import {
 import 'antd/dist/antd.css';
 import logo from "../images/books-login.svg";
 import { Modal, Button } from "antd";
+import { 
+  LoginHeader, 
+  LoginSlogan, 
+  LoginImage,
+  LoginA,
+} from "./styles/styles"
 
 const Authenticator = () => {
   const [visible, setVisible] = useState(false);
@@ -21,12 +27,12 @@ const Authenticator = () => {
     setVisible(true);
   };
 
-  const handleOk = e => {
+  const handleCancel = e => {
     console.log(e);
     setVisible(false);
   };
 
-  const handleCancel = e => {
+  const handleOk = e => {
     console.log(e);
     setVisible(false);
   };
@@ -61,14 +67,14 @@ const Authenticator = () => {
       <div className="App">
         <Switch>
           <Route path="/">
-            <header className="Bookbook">BookBook</header>
+            <LoginHeader>BookBook</LoginHeader>
             <div className="Logo">
-              <img src={logo} alt="logo" />
+              <LoginImage src={logo} alt="logo" />
             </div>
             <div className="Login">
-              <h1 className="Slogan">Descubra um mundo <br />de livros</h1>
+              <LoginSlogan>Descubra um mundo <br />de livros</LoginSlogan>
               <WindowInitial />
-              <p>Ou <a onClick={showModal}>registre-se agora</a></p>
+              <p>Ou <LoginA onClick={showModal}>registre-se agora</LoginA></p>
             </div>
             <Modal
               title="Cadastro"
@@ -76,7 +82,7 @@ const Authenticator = () => {
               onOk={handleOk}
               onCancel={handleCancel}
             >
-              <Registration />
+              <Registration setVisible={setVisible}/>
             </Modal>
           </Route>
         </Switch>

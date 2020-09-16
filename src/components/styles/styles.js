@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Input, Typography, Card } from "antd";
 import { List, Form } from "antd";
+import {
+  Modal,
+  Item
+} from "antd";
 
 
 const { Search } = Input;
@@ -10,6 +14,60 @@ export const ListAntd = styled(List)`
   /* background-color: white; */
   align-self: center;
   align-items: flex-end;
+`;
+
+export const LoginHeader = styled.header`
+  position: absolute;
+  width: 82%;
+  height: 34px;
+  left: 10%;
+  top: 29px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: rgba(124, 154, 242, 0.85);
+`;
+
+
+export const LoginButton = styled(Button)`
+  width: 400px;
+  background-color: #4951EC;
+  color: #fff;
+  margin-bottom: 0px !important; 
+`;
+
+export const LoginA = styled.a`
+  color: #4951EC;
+`;
+
+export const LoginForm = styled(Form)`
+  margin-top: -103px;
+  width: 600px;
+`;
+
+export const LoginSlogan = styled.h1`
+  text-align: right;
+  position: absolute;
+  right: 45px;
+  margin-top: -252px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 39px;
+  line-height: 64px;
+  display: flex;
+  align-items: center;
+  color: rgba(11, 7, 84, 0.85);
+`;
+
+export const LoginImage = styled.img`
+  height: 400px;
+  width: 400px;
+  margin: 25% auto;
 `;
 
 export const Div = styled.div`

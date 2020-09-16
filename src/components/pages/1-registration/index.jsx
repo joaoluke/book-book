@@ -8,13 +8,16 @@ import {
   Checkbox,
   Button,
   AutoComplete,
-  Modal,
+  message,
+  notification,
+
 } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { QuestionCircleOutlined, UploadOutlined } from '@ant-design/icons';
 import { residences } from "./residence.js";
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { StyledForm } from '../../styles/styles'
+import "./style/style.css"
+import { RegisterItem } from "../../styles/styles"
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
@@ -50,7 +53,24 @@ const tailFormItemLayout = {
   },
 };
 
-const Registration = () => {
+const openNotificationWithIcon = type => {
+  if (type === "success") {
+    notification[type]({
+      message: 'BookBook diz:',
+      description:
+        'Usuário criado com sucesso!',
+    });
+  }
+  else {
+    notification[type]({
+      message: 'BookBook diz:',
+      description:
+        'Falha ao criar o usuário! Tente novamente.',
+    });
+  }
+};
+
+const Registration = ({ setVisible }) => {
   const [form] = Form.useForm();
   // agreement: true
   // prefix: "55"
@@ -63,31 +83,21 @@ const Registration = () => {
         "name": values.name,
         "user": values.nickname,
         "email": values.email,
+        "image_url": values.image,
         "password": values.password,
         "password_confirmation": values.confirm,
-        "address": values.residence[1],
-        "cellphone": values.phone,
+        "address": values.residence[2],
       }
     })
       .then(() => {
-        alert("user criado com sucesso")
+        openNotificationWithIcon('success')
+        setVisible(false);
       })
       .catch(error => {
-        console.log(error)
+        openNotificationWithIcon('error')
       })
   };
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select
-        style={{
-          width: 70,
-        }}
-      >
-        <Option value="55">+55</Option>
-      </Select>
-    </Form.Item>
-  );
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
   const onWebsiteChange = value => {
@@ -98,10 +108,30 @@ const Registration = () => {
     }
   };
 
+  const props = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+
+
   const websiteOptions = autoCompleteResult.map(website => ({
     label: website,
     value: website,
-  }));
+  }))
+
   return (
     <StyledForm
       {...formItemLayout}
@@ -109,18 +139,54 @@ const Registration = () => {
       name="register"
       onFinish={onFinish}
       initialValues={{
-        residence: ['Estado', 'Paraná', 'Curitiba'],
+        residence: [],
         prefix: '55',
       }}
       scrollToFirstError
     >
       <Form.Item
         name="name"
-        label="Name"
+        label="Nome"
         rules={[
           {
             required: true,
-            message: 'Please input your Name',
+            message: 'Insira seu nome',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        name="image"
+        label={
+          <span>
+            Sua Foto&nbsp;
+            <Tooltip title="Voce deve apenas por um link de uma imagem 
+            da internet, como a foto do seu perfil do Facebook por exemplo.">
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </span>
+        }
+      >
+        <Input placeholder="https://imagefromweb" />
+      </Form.Item>
+
+      <Form.Item
+        name="nickname"
+        label={
+          <span>
+            Usuário&nbsp;
+            <Tooltip title="Como você quer que os outros te chamem?">
+              <QuestionCircleOutlined />
+            </Tooltip>
+          </span>
+        }
+        rules={[
+          {
+            required: true,
+            message: 'Digite seu usuário!',
+            whitespace: true,
           },
         ]}
       >
@@ -133,11 +199,11 @@ const Registration = () => {
         rules={[
           {
             type: 'email',
-            message: 'The input is not valid E-mail!',
+            message: 'Insira um email válido!',
           },
           {
             required: true,
-            message: 'Please input your E-mail!',
+            message: 'Digite seu email!',
           },
         ]}
       >
@@ -146,11 +212,11 @@ const Registration = () => {
 
       <Form.Item
         name="password"
-        label="Password"
+        label="Senha"
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: 'Digite sua senha!',
           },
         ]}
         hasFeedback
@@ -160,13 +226,13 @@ const Registration = () => {
 
       <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label="Confirmar Senha"
         dependencies={['password']}
         hasFeedback
         rules={[
           {
             required: true,
-            message: 'Please confirm your password!',
+            message: 'Digite a confirmação da sua senha!',
           },
           ({ getFieldValue }) => ({
             validator(rule, value) {
@@ -174,7 +240,7 @@ const Registration = () => {
                 return Promise.resolve();
               }
 
-              return Promise.reject('The two passwords that you entered do not match!');
+              return Promise.reject('As senhas não coincidem!');
             },
           }),
         ]}
@@ -183,34 +249,12 @@ const Registration = () => {
       </Form.Item>
 
       <Form.Item
-        name="nickname"
-        label={
-          <span>
-            Nickname&nbsp;
-            <Tooltip title="What do you want others to call you?">
-              <QuestionCircleOutlined />
-            </Tooltip>
-          </span>
-        }
-        rules={[
-          {
-            required: true,
-            message: 'Please input your nickname!',
-            whitespace: true,
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
         name="residence"
-        label="Habitual Residence"
+        label="Cidade"
         rules={[
           {
             type: 'array',
             required: true,
-            message: 'Please select your habitual residence!',
           },
         ]}
       >
@@ -218,40 +262,24 @@ const Registration = () => {
       </Form.Item>
 
       <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your phone number!',
-          },
-        ]}
-      >
-        <Input
-          addonBefore={prefixSelector}
-          style={{
-            width: '100%',
-          }}
-        />
-      </Form.Item>
-
-      <Form.Item
         name="agreement"
         valuePropName="checked"
         rules={[
           {
+            required: true,
             validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject('Should accept agreement'),
+              value ? Promise.resolve() : Promise.reject('Tem que aceitar os termos do uso'),
           },
         ]}
         {...tailFormItemLayout}
       >
         <Checkbox>
-          I have read the <a href="terms.html">agreement</a>
+          Eu aceito os termos de <a href="terms.html" target="_BLANK">responsabilidade</a>
         </Checkbox>
       </Form.Item>
+
       <Form.Item {...tailFormItemLayout}>
-        <Button type="primary" htmlType="submit">
+        <Button htmlType="submit">
           Register
         </Button>
       </Form.Item>
