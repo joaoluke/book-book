@@ -6,6 +6,7 @@ import { Avatar, Space } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
+import { setList } from '../../../redux/actions'
 
 
 
@@ -18,6 +19,7 @@ const IconText = ({ icon, text }) => (
 
 const Timeline = () => {
    const [listData, setData] = useState([]);
+   const teste = useSelector((state) => state.timeline) 
    //const listData = useSelector((state) => state.timeline) 
   const dispatch = useDispatch()
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
@@ -32,13 +34,14 @@ const Timeline = () => {
       .then(resp => {
     
         setData(resp.data)
-       // dispatch(setList(resp.data))
+        dispatch(setList(resp.data))
       })
       .catch((error) => { // erro no request
         console.log(error)
       })
   }, [])
 
+  console.log(teste.data)
  
  
 
