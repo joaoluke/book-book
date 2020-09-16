@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Timeline from './pages/5-timeline'
 import WindowInitial from './pages/2-login'
 import Registration from './pages/1-registration'
+import Prateleiras from './pages/3-prateleiras'
 import Busca from './pages/4-busca'
 import Header from './header'
 import {
@@ -54,6 +55,10 @@ const Authenticator = () => {
     history.push('/timeline')
   }
 
+  const doPrateleiras = () => {
+    history.push('/prateleiras')
+  }
+
   useEffect(() => {
     dispatch(requestValidate())
   }, [dispatch])
@@ -95,13 +100,15 @@ const Authenticator = () => {
       <button onClick={doLogout}>LOGOUT</button>
       <button onClick={doBusca}>BUSCA</button>
       <button onClick={doTimeline}>TIMELINE</button>
+      <button onClick={doPrateleiras}>PRATELEIRAS</button>
       <Switch>
-        {/* <Route path="/prateleiras">
+         <Route path="/prateleiras">
                   <Prateleiras />
-              </Route> */}
+              </Route> 
 
         <Route path="/busca">
           <Busca />
+          <Prateleiras></Prateleiras>
         </Route>
 
         <Route path="/timeline/">

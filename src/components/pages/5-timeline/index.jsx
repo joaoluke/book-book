@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { Avatar, Space } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
-import { useSelector } from 'react-redux'
 import {
   Div,
   ListAntd,
@@ -18,7 +17,8 @@ import {
   StyledTimelineCardAvatar,
   StyledTimelineAuthor,
 } from "../../styles/styles";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { requestBooks } from '../../../redux/actions';
 
 const IconText = ({ icon, text }) => (
   <Space>
@@ -29,8 +29,12 @@ const IconText = ({ icon, text }) => (
 
 const Timeline = () => {
   const getUser = useSelector((state) => state.session.user.user)
-  const getId = useSelector((state) => state.session.user.id)
+  const getId = useSelector((state) => state.session.user.id);
   const getToken = useSelector((state) => state.session.token)
+  const books = useSelector((state) => {
+    return state.timeline;
+  })
+  const dispatch = useDispatch();
   console.log(getUser)
   console.log(getId)
   console.log(getToken)
@@ -45,27 +49,13 @@ const Timeline = () => {
 
 
   useEffect(() => {
-    axios
-      .get(url,
-        { headers: { Authorization: getToken } }
-      )
-      .then(resp => {
-        console.log("title: " + resp.data[1].title)
-        console.log("review: " + resp.data[1].review)
-        console.log("url: " + resp.data[1].image_url)
-        setData(resp.data)
-        console.log(resp.data[0].creator.name[0])
-        console.log(resp.data)
-      })
-      .catch((error) => { // erro no request
-        console.log(error)
-      })
-  }, [getToken, token])
-  // Remover list data: loop infinito
+    dispatch(requestBooks(getId));
+  }, [dispatch, getId])
+
 
   return (
     < Div >
-      <h1>Olá User,</h1>
+      <h1>Olá {getUser}</h1>
       <p>Timeline</p>
       <div>
         <ListAntd
@@ -78,7 +68,7 @@ const Timeline = () => {
             },
             pageSize: 5,
           }}
-          dataSource={listData}
+          dataSource={books}
           footer={
             <div>
               <b>ant design</b> footer part

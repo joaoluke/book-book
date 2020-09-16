@@ -1,13 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
-import Authenticator from './components/authenticator.jsx'
+import Authenticator from './components/authenticator.jsx';
 import { createGlobalStyle } from "styled-components";
+
+
 
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #F3F8FF;
   }
 `;
+
 
 
 function App() {
@@ -26,6 +29,7 @@ function App() {
     console.log(e);
     setVisible(false);
   };
+
 
   return (
     <div className="App">

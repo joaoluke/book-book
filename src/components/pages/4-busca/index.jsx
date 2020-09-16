@@ -49,18 +49,18 @@ const Busca = () => {
               <Button
                 type="text"
                 key="add"
-                onClick={() =>
-                  console.log({
-                    title: book.volumeInfo.title,
-                    autor: book.volumeInfo.authors,
-                    image_url:
-                      "https://books.google.com/books/content?id=" +
-                      book.id +
-                      "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api",
-                    categories: "tecnologia",
-                    google_book_id: book.id,
-                  })
-                }
+              // onClick={() =>
+              //   console.log({
+              //     title: book.volumeInfo.title,
+              //     autor: book.volumeInfo.authors,
+              //     image_url:
+              //       "https://books.google.com/books/content?id=" +
+              //       book.id +
+              //       "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api",
+              //     categories: "tecnologia",
+              //     google_book_id: book.id,
+              //   })
+              // }
               >
                 Adicionar
               </Button>,
@@ -77,4 +77,3 @@ const Busca = () => {
 };
 
 export default Busca;
-

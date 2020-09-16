@@ -4,7 +4,10 @@ export const LOGOUT = 'LOGOUT'
 export const TRUE = 'TRUE'
 export const FALSE = 'FALSE'
 export const LOADING = 'LOADING'
-export const SETLIST = 'SETLIST'
+export const SETLIST = 'SETLIST' //  timeline
+export const SET_USER_BOOKS = 'SET_USER_BOOKS' // prateleiras
+export const SET_BOOKS = 'SET_BOOKS'
+
 
 export const login = (token, user) => ({
   type: LOGIN,
@@ -54,5 +57,48 @@ export const setAuthenticationTrue = () => ({
   type: TRUE
 });
 
+export const setList = (list) => ({
+  type: SETLIST,
+  list,
+})
+
+//*******Prateleira*************************
+export const setUserBooks = (books) => ({
+  type: SET_USER_BOOKS,
+  books,
+})
+
+export const requestUserBooks = (userId) => (dispatch, getState) => {
+  const { session } = getState()
+  axios
+    .get(`https://ka-users-api.herokuapp.com/users/${userId}/books/`,
+      { headers: { Authorization: session.token } }
+    )
+    .then(resp => {
+      dispatch(setUserBooks(resp.data));
+    })
+    .catch((error) => { // erro no request
+      console.log(error)
+    })
+}
 
 
+//*******Timeline*************************
+export const setBooks = (books) => ({
+  type: SET_BOOKS,
+  books,
+})
+
+export const requestBooks = (userId) => (dispatch, getState) => {
+  const { session } = getState()
+  axios
+    .get(`https://ka-users-api.herokuapp.com/book_reviews`,
+      { headers: { Authorization: session.token } }
+    )
+    .then(resp => {
+      dispatch(setBooks(resp.data));
+    })
+    .catch((error) => { // erro no request
+      console.log(error)
+    })
+}
