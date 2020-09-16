@@ -1,7 +1,7 @@
 import { LOGIN, LOGOUT } from '../actions'
 
 const defaultState = {
-  token: localStorage.getItem('token') || "",
+  token: localStorage.getItem('authToken') || "",
   user: JSON.parse(localStorage.getItem("currentUser")) || {}
 }
 

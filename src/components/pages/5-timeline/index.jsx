@@ -5,6 +5,8 @@ import { ListAntd } from "../../styles/styles";
 import { Avatar, Space } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+
 
 
 const IconText = ({ icon, text }) => (
@@ -15,28 +17,34 @@ const IconText = ({ icon, text }) => (
 );
 
 const Timeline = () => {
-  const [listData, setData] = useState([]);
+   const [listData, setData] = useState([]);
+   //const listData = useSelector((state) => state.timeline) 
+  const dispatch = useDispatch()
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
+  const getUser = useSelector((state) => state.session.user.user) // Nome usuario
+  const getToken = useSelector((state) => state.session.token)  
 
   useEffect(() => {
     axios
-      .get(url,
-        { headers: { Authorization: "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5OTgsImV4cCI6MTYzMTIxMDE3NH0.YKpX8EiI9qVJyEG05hAUM9UdRqVy6EYYa8nyCPA2X6M" } }
+      .get(url
+         ,{ headers: { Authorization: getToken } }
       )
       .then(resp => {
-        console.log("title: " + resp.data[1].title)
-        console.log("review: " + resp.data[1].review)
-        console.log("url: " + resp.data[1].image_url)
+    
         setData(resp.data)
+       // dispatch(setList(resp.data))
       })
       .catch((error) => { // erro no request
         console.log(error)
       })
   }, [])
 
+ 
+ 
+
   return (
     <Div>
-      <h1>Olá User,</h1>
+      <h1>Olá {getUser}</h1>
       <p>Timeline</p>
       <div>
         <ListAntd
@@ -44,7 +52,7 @@ const Timeline = () => {
           size="large"
           pagination={{
             onChange: (page) => {
-              console.log(page);
+              //console.log(page);
             },
             pageSize: 3,
           }}
@@ -73,7 +81,7 @@ const Timeline = () => {
                   text="2"
                   key="list-vertical-message"
                 />,
-                console.log(item),
+                // console.log(item),
               ]}
               extra={
                 <img

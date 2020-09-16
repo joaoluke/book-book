@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./App.css";
 import Authenticator from './components/authenticator.jsx'
 import { createGlobalStyle } from "styled-components";
+
+
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -10,8 +12,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 
-function App() {
 
+function App() {
+  
+  
+
+
+
+  
   return (
     <div className="App">
       <GlobalStyle />

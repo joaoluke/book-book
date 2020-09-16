@@ -4,6 +4,8 @@ export const LOGOUT = 'LOGOUT'
 export const TRUE = 'TRUE'
 export const FALSE = 'FALSE'
 export const LOADING = 'LOADING'
+export const SETLIST = 'SETLIST' //  timeline
+export const SET_USER_BOOKS = 'SET_USER_BOOKS'
 
 
 export const login = (token, user) => ({
@@ -55,4 +57,29 @@ export const setAuthenticationTrue = () => ({
   type: TRUE
 });
 
+export const setList = (list) => ({
+  type: SETLIST,
+  list,
+})
 
+export const setUserBooks = (books) => ({
+  type: SET_USER_BOOKS,
+  books,
+})
+
+export const requestUserBooks= (userId) => (dispatch,getState) => {
+  const {session} = getState()
+  axios
+  .get(`https://ka-users-api.herokuapp.com/users/${userId}/books/`,
+     { headers: { Authorization: session.token } }
+  )
+  .then(resp => {
+
+    // console.log(resp.data[1])
+    dispatch(setUserBooks(resp.data));
+  })
+  .catch((error) => { // erro no request
+    console.log(error)
+  })
+
+}
