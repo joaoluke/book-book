@@ -3,8 +3,8 @@ import "antd/dist/antd.css";
 import { Div } from "../../styles/styles";
 import { ListAntd } from "../../styles/styles";
 import { Avatar, Space } from "antd";
-import { useDispatch, useSelector } from 'react-redux'
-import { requestBooks } from '../../../redux/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { requestBooks } from '../../../redux/actions';
 
 
 
@@ -17,18 +17,17 @@ const IconText = ({ icon, text }) => (
 
 const Timeline = () => {
 
-  const userId = useSelector((state) => state.session.user.id)
-  const dispatch = useDispatch()
-
-  const url = "https://ka-users-api.herokuapp.com/book_reviews"
-  const getUser = useSelector((state) => state.session.user.user) // Nome usuario
+  const userId = useSelector((state) => state.session.user.id);
+  const dispatch = useDispatch();
+  const getUser = useSelector((state) => state.session.user.user); // Nome usuario
 
   useEffect(() => {
-    userId && dispatch(requestBooks(userId))
-  }, [userId])
+    dispatch(requestBooks(userId));
+  }, [])
  
+  
   const books = useSelector((state) =>{
-    return state.timeline
+    return state.timeline;
   }) 
 
   return (
