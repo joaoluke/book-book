@@ -5,7 +5,8 @@ const defaultState = []
 const timeline = (state = defaultState, action) => {
   switch (action.type) {
     case SETLIST:
-      return [...state, action.list];
+      const {list} = action
+      return [...state, ...list];
     default:
       return state;
   }

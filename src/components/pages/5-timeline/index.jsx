@@ -19,8 +19,8 @@ const IconText = ({ icon, text }) => (
 
 const Timeline = () => {
    const [listData, setData] = useState([]);
-   const teste = useSelector((state) => state.timeline) 
-   //const listData = useSelector((state) => state.timeline) 
+   const books = useSelector((state) => state.timeline) 
+
   const dispatch = useDispatch()
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
   const getUser = useSelector((state) => state.session.user.user) // Nome usuario
@@ -34,6 +34,7 @@ const Timeline = () => {
       .then(resp => {
     
         setData(resp.data)
+    
         dispatch(setList(resp.data))
       })
       .catch((error) => { // erro no request
@@ -41,7 +42,7 @@ const Timeline = () => {
       })
   }, [])
 
-  console.log(teste.data)
+
  
  
 
@@ -59,7 +60,7 @@ const Timeline = () => {
             },
             pageSize: 3,
           }}
-          dataSource={listData}
+          dataSource={books} 
           footer={
             <div>
               <b>ant design</b> footer part
@@ -67,25 +68,8 @@ const Timeline = () => {
           }
           renderItem={(item) => (
             <ListAntd.Item
-              key={item.title}
-              actions={[
-                <IconText
-                  icon={StarOutlined}
-                  text="156"
-                  key="list-vertical-star-o"
-                />,
-                <IconText
-                  icon={LikeOutlined}
-                  text="156"
-                  key="list-vertical-like-o"
-                />,
-                <IconText
-                  icon={MessageOutlined}
-                  text="2"
-                  key="list-vertical-message"
-                />,
-                // console.log(item),
-              ]}
+               key={item.title}
+
               extra={
                 <img
                   width={272}
