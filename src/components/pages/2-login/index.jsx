@@ -1,9 +1,10 @@
 import React from "react";
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Button, Checkbox, Input } from 'antd';
 //import { StyledForm, StyledDiv, StyledRespDiv } from '../../styled/styledform/index.js'
-import { requestLogin } from '../../../redux/actions'
+import { requestLogin } from '../../../redux/actions';
+import { LoginForm, LoginButton } from '../../styles/styles'
 
 const layout = {
   labelCol: { span: 8 },
@@ -31,38 +32,38 @@ const Login = () => {
 
   return (
     <div>
-      <Form
+      <LoginForm
         {...layout}
         name="basic"
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-      > <div>Login</div>
+      >
         <Form.Item
-          label="Username"
+          label="Usuário"
           name="user"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+          rules={[{ required: true, message: 'Digite seu nome de usuário!' }]}
         >
           <Input placeholder="name" />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label="Senha"
           name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
+          rules={[{ required: true, message: 'Digite sua senha!' }]}
         >
           <Input.Password placeholder="password" />
         </Form.Item>
 
         <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox>Lembre-me</Checkbox>
         </Form.Item>
 
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
+          <LoginButton type="primary" htmlType="submit">
             Submit
-        </Button>
+          </LoginButton>
         </Form.Item>
-      </Form>
+      </LoginForm>
 
     </div>
   );
