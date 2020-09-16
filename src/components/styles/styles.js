@@ -79,6 +79,8 @@ export const StyledCardSearch = styled(Card)`
 
 
 
+/*=TIMELINE=================================*/
+
 export const StyledCardTimeline = styled.div`
 background-color: #EEE;
 height: 500px;
@@ -165,4 +167,47 @@ left: 32%;
 `
 
 export const StyledForm = styled(Form)`
-top: -50px`
+top: -50px;
+`
+
+/*BUSCA=================================*/
+
+export const StyledBuscaCard = styled.div`
+background-color: #EEE;
+height: 230px;
+width: 800px;
+position: flex;
+flex-direction: row;
+justify-content:space-between;
+margin: 50px;
+padding: 0px;
+border: 5px solid black;
+`
+
+export const StyledBuscaImg = styled.img`
+margin: 20px;
+max-height:190px;
+alt: "logo";
+`
+
+export const StyledBuscaCardTextContainer = styled.div`
+`
+
+export const StyledBuscaCardTitle = styled.h2`
+font-family: Poppins;
+  font-size: 2rem;
+  color: #888;
+  width: 400px;
+`
+
+export const StyledBuscaCardAuthor = styled.div`
+`
+
+export const StyledBuscaCardYear = styled.div`
+`
+
+export const StyledBuscaCardDescription = styled.div`
+`
+
+export const StyledBuscaCardButton = styled.button`
+`

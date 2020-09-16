@@ -4,7 +4,16 @@ import {
   StyledH1,
   StyledBodySearch,
   StyledInputSearch,
-  StyledCardSearch
+  StyledCardSearch,
+  StyledBuscaCard,
+  StyledBuscaImg,
+  StyledBuscaCardTextContainer,
+  StyledBuscaCardTitle,
+  StyledBuscaCardAuthor,
+  StyledBuscaCardYear,
+  StyledBuscaCardDescription,
+  StyledBuscaCardButton,
+  StyledTimelineCardSubtitle,
 } from '../../styles/styles.js'
 
 const Busca = () => {
@@ -32,7 +41,22 @@ const Busca = () => {
       />
       {book &&
         book.map((book, index) => (
-          <StyledCardSearch
+          <StyledBuscaCard key={index}>
+            <StyledBuscaImg src={
+              "https://books.google.com/books/content?id=" +
+              book.id +
+              "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api"
+            } />
+            <StyledBuscaCardTextContainer>
+              <StyledBuscaCardTitle>{book.volumeInfo.title}</StyledBuscaCardTitle>
+              <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor>
+              <StyledBuscaCardDescription>{book.searchInfo.textSnippet}</StyledBuscaCardDescription>
+            </StyledBuscaCardTextContainer>
+          </StyledBuscaCard>
+
+
+        ))}
+      { /*<StyledCardSearch
             key={index}
             style={{ width: 250 }}
             cover={
@@ -70,8 +94,8 @@ const Busca = () => {
               title={book.volumeInfo.title}
               description={book.volumeInfo.authors}
             />
-          </StyledCardSearch>
-        ))}
+          </StyledCardSearch> */}
+
     </StyledBodySearch>
   );
 };
