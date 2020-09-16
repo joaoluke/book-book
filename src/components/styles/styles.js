@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { 
-  Input, 
-  Typography, 
-  Card, 
-  List, 
-  Form, 
-  Button, 
+import {
+  Input,
+  Typography,
+  Card,
+  List,
+  Form,
+  Button,
   Modal,
   Item
 } from "antd";
@@ -15,10 +15,9 @@ const { Search } = Input;
 const { Title } = Typography;
 
 export const ListAntd = styled(List)`
-  background-color: white;
+  /* background-color: white; */
   align-self: center;
   align-items: flex-end;
-  margin: auto;
 `;
 
 export const LoginHeader = styled.header`
@@ -140,3 +139,92 @@ export const StyledCardSearch = styled(Card)`
   margin: 60px auto;
 `;
 
+
+
+export const StyledCardTimeline = styled.div`
+background-color: #EEE;
+height: 500px;
+width: 400px;
+position: relative;
+left: 50px;
+margin: 0px;
+padding: 5px;
+/* border: 5px solid black; */
+`
+export const StyledTimelineCardUserContainer = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+/* border: solid 2px blue; */
+margin-bottom: 5px;
+`
+
+
+export const StyledTimelineCardAvatar = styled.div`
+background-color: #3A3;
+width: 30px;
+height: 30px;
+border-radius: 15px;
+color: white;
+display: flex;
+align-items: center;
+justify-content:center;
+
+`
+
+export const StyledTimelineCardUser = styled.div`
+padding-left: 5px;
+`
+
+export const StyledTimelineCardTopText = styled.div`
+display: flex;
+justify-content:space-between;
+/* border: solid 2px blue; */
+`
+
+export const StyledTimelineAuthor = styled.div`
+width: 300px;
+font-size: 1.5rem;
+color: blue;
+/* border: solid 2px blue; */
+`
+
+export const StyledTimelineImg = styled.img`
+margin-top: 10px;
+max-width: 272px;
+max-height:300px;
+alt: "logo";
+`
+
+export const StyledTimelineCardTitle = styled.div`
+
+/* display: flex;
+justify-content: flex-start; */
+/* border: 1px solid green; */
+h2 { 
+  font-family: Poppins;
+  font-size: 2rem;
+  color: #888;
+  text-align: justify;
+  margin-left: 60px;
+  width: 270px
+}
+`
+
+export const StyledTimelineCardSubtitle = styled.div`
+font-family: Poppins;
+font-size: 1.5rem;
+color: #888;
+/* border: solid 2px blue; */
+`
+
+export const StyledTimelineButton = styled.button`
+color:blue;
+padding: 0px 5px;
+position: absolute;
+top: 93%;
+left: 32%;
+`
+
+export const StyledForm = styled(Form)`
+top: -50px`

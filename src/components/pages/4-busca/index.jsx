@@ -14,7 +14,11 @@ const Busca = () => {
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchBook}`)
       .then((response) => response.json())
-      .then(({ items }) => setBook(items));
+      .then(({ items }) => {
+        console.log(items)
+        setBook(items)
+      });
+
   }, [searchBook]);
 
   return (
