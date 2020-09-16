@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "antd/dist/antd.css";
 import { Div } from "../../styles/styles";
 import { ListAntd } from "../../styles/styles";
 import { Avatar, Space } from "antd";
-import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setList } from '../../../redux/actions'
+import { requestBooks } from '../../../redux/actions'
 
 
 
@@ -18,33 +16,20 @@ const IconText = ({ icon, text }) => (
 );
 
 const Timeline = () => {
-   const [listData, setData] = useState([]);
-   const books = useSelector((state) => state.timeline) 
 
+  const userId = useSelector((state) => state.session.user.id)
   const dispatch = useDispatch()
+
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
   const getUser = useSelector((state) => state.session.user.user) // Nome usuario
-  const getToken = useSelector((state) => state.session.token)  
 
   useEffect(() => {
-    axios
-      .get(url
-         ,{ headers: { Authorization: getToken } }
-      )
-      .then(resp => {
-    
-        setData(resp.data)
-    
-        dispatch(setList(resp.data))
-      })
-      .catch((error) => { // erro no request
-        console.log(error)
-      })
-  }, [])
-
-
+    userId && dispatch(requestBooks(userId))
+  }, [userId])
  
- 
+  const books = useSelector((state) =>{
+    return state.timeline
+  }) 
 
   return (
     <Div>
