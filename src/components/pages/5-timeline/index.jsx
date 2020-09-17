@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import "antd/dist/antd.css";
-import { Div } from "../../styles/styles";
-import { ListAntd } from "../../styles/styles";
-import { Avatar, Space } from "antd";
-import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import 'antd/dist/antd.css';
+import { Div } from '../../styles/styles';
+import { ListAntd } from '../../styles/styles';
+import { Avatar, Space } from 'antd';
+import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import axios from 'axios'
 
 
@@ -19,6 +19,7 @@ export default function useBookSearch ()  {
   const [error, setError] = useState(false);
   const [books, setBooks] = useState([]);
   const [hasMore, setHasMore] = useState(false);
+  const [currentBooks, setCurrentBooks] = useState([]);
 
   const [ pageNumber, setPageNumber] = useState(1)
 
@@ -28,16 +29,22 @@ export default function useBookSearch ()  {
     if (loading) return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPageNumber(prevPageNumber => prevPageNumber + 1)
+      if (entries[0].isIntersecting) {
+        console.log('visible')
       }
     })
     if (node) observer.current.observe(node)
   }, [loading, hasMore]);
 
+  useEffect(()=>{
+    let beginning = 0
+    let end = 40
+    setCurrentBooks([...books].slice(beginning,end))
+  }, [pageNumber])
+
   
 
-  const url = "https://ka-users-api.herokuapp.com/book_reviews"
+  const url = 'https://ka-users-api.herokuapp.com/book_reviews'
 
   useEffect(() => {
     setLoading(true);
@@ -46,22 +53,19 @@ export default function useBookSearch ()  {
       .get(url,
         { 
           headers: { 
-            Authorization: "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5OTgsImV4cCI6MTYzMTIxMDE3NH0.YKpX8EiI9qVJyEG05hAUM9UdRqVy6EYYa8nyCPA2X6M"
+            Authorization: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5OTgsImV4cCI6MTYzMTIxMDE3NH0.YKpX8EiI9qVJyEG05hAUM9UdRqVy6EYYa8nyCPA2X6M'
           }, 
           params: { 
             page: pageNumber 
           } 
         })
       .then(resp => {
-        // console.log("title: " + resp.data[1].title)
-        // console.log("review: " + resp.data[1].review)
-        // console.log("url: " + resp.data[1].image_url)
-        console.log(resp.data.length)
         setBooks(resp.data)
         setHasMore(resp.data.length > 0)
         setLoading(false)
+        setCurrentBooks([...resp.data].slice(0,20))
       })
-      .catch((error) => { // erro no request
+      .catch((error) => {
         console.log(error)
         setError(true)
       })
@@ -70,60 +74,19 @@ export default function useBookSearch ()  {
   return (
     <Div>
       <h1>Olá User,</h1>
-      <p>Timeline</p>
+      <p>Que livro você quer ler hoje?</p>
       <div>
-        <ListAntd
-          itemLayout="vertical"
-          size="large"
-          dataSource={books}
-          
-          renderItem={(item) => (
-              <ListAntd.Item
-                key={item.title}
-                
-                actions={[
-                  <IconText
-                    icon={StarOutlined}
-                    text="156"
-                    key="list-vertical-star-o"
-                  />,
-                  <IconText
-                    icon={LikeOutlined}
-                    text="156"
-                    key="list-vertical-like-o"
-                  />,
-                  <IconText
-                    icon={MessageOutlined}
-                    text="2"
-                    key="list-vertical-message"
-                  />,
-                ]}
-                extra={
-                  <img
-                    width={272}
-                    alt="logo"
-                    src={item.image_url}
-                  />
-                }
-              >
-                {books.map((book, index) => {
+        {currentBooks.map((book, index) => {
+          if (books.length === index + 1) {
+            return <div ref={lastBookRefElement} key={index}>oi</div>
+          } else {
+            return <div key={book}>oi</div>
+          }
+        })}
 
-                  return (
-                    <div>
-                    
-                    </div>
-                  )
-                  }
-                )}
-                
-                {item.content}
-                
-              </ListAntd.Item>
-          )}
-        />
       </div>
-      <h1>{loading && "Loading..."}</h1>
-      <h1>{error && "Error to request"}</h1>
+      <h1>{loading && 'Loading...'}</h1>
+      <h1>{error && 'Error to request'}</h1>
     </Div>
   );
 };

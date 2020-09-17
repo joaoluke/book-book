@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Switch, Route, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Timeline from './pages/5-timeline'
+import Shelf from "./pages/3-prateleiras"
 import WindowInitial from './pages/2-login'
 import Registration from './pages/1-registration'
 import Busca from './pages/4-busca'
@@ -50,6 +51,10 @@ const Authenticator = () => {
     history.push('/busca')
   }
 
+  const doShelf = () => {
+    history.push('/shelf')
+  }
+
   const doTimeline = () => {
     history.push('/timeline')
   }
@@ -95,10 +100,11 @@ const Authenticator = () => {
       <button onClick={doLogout}>LOGOUT</button>
       <button onClick={doBusca}>BUSCA</button>
       <button onClick={doTimeline}>TIMELINE</button>
+      <button onClick={doShelf}>PRATELEIRAS</button>
       <Switch>
-        {/* <Route path="/prateleiras">
-                  <Prateleiras />
-              </Route> */}
+        <Route path="/shelf">
+          <Shelf />
+        </Route>
 
         <Route path="/busca">
           <Busca />
@@ -107,10 +113,7 @@ const Authenticator = () => {
         <Route path="/timeline/">
           <Header />
           <Timeline />
-
-
         </Route>
-
       </Switch>
     </div>
   )
