@@ -3,7 +3,8 @@ import { Input, Typography, Card } from "antd";
 import { List, Form } from "antd";
 import {
   Modal,
-  Item
+  Item,
+  Button,
 } from "antd";
 
 
@@ -231,15 +232,12 @@ top: -50px;
 /*BUSCA=================================*/
 
 export const StyledBuscaCard = styled.div`
-background-color: #EEE;
+background-image: linear-gradient(to bottom right, #CCE, #FFF);
 height: 230px;
-width: 800px;
-position: flex;
-flex-direction: row;
-justify-content:space-between;
+width: 900px;
+display: flex;
 margin: 50px;
-padding: 0px;
-border: 5px solid black;
+padding-right: 20px;
 `
 
 export const StyledBuscaImg = styled.img`
@@ -251,21 +249,55 @@ alt: "logo";
 export const StyledBuscaCardTextContainer = styled.div`
 `
 
+export const StyledBuscaCardTopTextContainer = styled.div`
+display: flex;
+justify-content: space-between;
+margin-top: 40px;
+`
+
+
 export const StyledBuscaCardTitle = styled.h2`
 font-family: Poppins;
   font-size: 2rem;
   color: #888;
   width: 400px;
+  text-align: justify;
+  position: relative;
+  top: -20px;
 `
 
 export const StyledBuscaCardAuthor = styled.div`
+ font-size: 1.2rem;
+  width: 400px;
+  text-align: justify;
+  position: relative;
+  top: -30px;
+`
+
+export const StyledBuscaCardButtonContainer = styled.div`
+`
+
+
+export const StyledBuscaCardButton = styled(Button)`
+background-color:#1890ff;
+color: white;
+margin-right:30px;
+
 `
 
 export const StyledBuscaCardYear = styled.div`
 `
 
 export const StyledBuscaCardDescription = styled.div`
+font-size: 1.5rem;
+text-align: justify;
 `
 
-export const StyledBuscaCardButton = styled.button`
+export const StyledPopoverContainer = styled.div`
+/*background-color: #aaa;
+color: white;*/
+`
+
+export const StyledPopover = styled.p`
+cursor: pointer;
 `

@@ -14,9 +14,9 @@ import {
 import 'antd/dist/antd.css';
 import logo from "../images/books-login.svg";
 import { Modal, Button } from "antd";
-import { 
-  LoginHeader, 
-  LoginSlogan, 
+import {
+  LoginHeader,
+  LoginSlogan,
   LoginImage,
   LoginA,
 } from "./styles/styles"
@@ -87,7 +87,7 @@ const Authenticator = () => {
               onOk={handleOk}
               onCancel={handleCancel}
             >
-              <Registration setVisible={setVisible}/>
+              <Registration setVisible={setVisible} />
             </Modal>
           </Route>
         </Switch>
@@ -102,9 +102,9 @@ const Authenticator = () => {
       <button onClick={doTimeline}>TIMELINE</button>
       <button onClick={doPrateleiras}>PRATELEIRAS</button>
       <Switch>
-         <Route path="/prateleiras">
-                  <Prateleiras />
-              </Route> 
+        <Route path="/prateleiras">
+          <Prateleiras />
+        </Route>
 
         <Route path="/busca">
           <Busca />

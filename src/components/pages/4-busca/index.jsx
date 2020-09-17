@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Input, Typography, Button } from "antd";
+import "../../../App.css"
+import { Input, Typography, Button, Popover } from "antd";
 import {
   StyledH1,
   StyledBodySearch,
@@ -14,11 +15,39 @@ import {
   StyledBuscaCardDescription,
   StyledBuscaCardButton,
   StyledTimelineCardSubtitle,
+  StyledBuscaCardTopTextContainer,
+  StyledBuscaCardButtonContainer,
+  StyledPopover,
+  StyledPopoverContainer,
 } from '../../styles/styles.js'
+
+
 
 const Busca = () => {
   const [book, setBook] = useState([]);
   const [searchBook, setSearchBook] = useState("javascript");
+
+
+  const queroLer = () => {
+    console.log("quero ler")
+  }
+
+  const lendo = () => {
+    console.log("lendo")
+  }
+
+  const jali = () => {
+    console.log("ja li")
+  }
+
+
+  const content = (
+    <StyledPopoverContainer>
+      <StyledPopover onClick={queroLer} >Quero Ler</StyledPopover>
+      <StyledPopover onClick={lendo}>Quero Ler</StyledPopover>
+      <StyledPopover onClick={jali}>Quero Ler</StyledPopover>
+    </StyledPopoverContainer>
+  );
 
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchBook}`)
@@ -42,19 +71,29 @@ const Busca = () => {
       {book &&
         book.map((book, index) => (
           <StyledBuscaCard key={index}>
-            <StyledBuscaImg src={
-              "https://books.google.com/books/content?id=" +
-              book.id +
-              "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api"
-            } />
+            <div>
+              <StyledBuscaImg src={
+                "https://books.google.com/books/content?id=" +
+                book.id +
+                "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api"
+              } />
+            </div>
             <StyledBuscaCardTextContainer>
-              <StyledBuscaCardTitle>{book.volumeInfo.title}</StyledBuscaCardTitle>
-              <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor>
-              <StyledBuscaCardDescription>{book.searchInfo.textSnippet}</StyledBuscaCardDescription>
+              <StyledBuscaCardTopTextContainer>
+                <div>
+                  <StyledBuscaCardTitle>{book.volumeInfo.title}</StyledBuscaCardTitle>
+                  <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor>
+                </div>
+                <StyledBuscaCardButtonContainer>
+                  <Popover placement="right" content={content} trigger="click">
+                    <StyledBuscaCardButton>Adicionar</StyledBuscaCardButton>
+                  </Popover>
+
+                </StyledBuscaCardButtonContainer>
+              </StyledBuscaCardTopTextContainer>
+              <StyledBuscaCardDescription>Descrição:{book.searchInfo.textSnippet}</StyledBuscaCardDescription>
             </StyledBuscaCardTextContainer>
           </StyledBuscaCard>
-
-
         ))}
       { /*<StyledCardSearch
             key={index}
