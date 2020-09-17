@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Card } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { requestUserBooks } from '../../../redux/actions'
+import axios from 'axios'
 
 const { Meta } = Card;
 
@@ -22,6 +23,34 @@ const Prateleiras = () => {
   if (books.length <= 0) {
     return <div> carregando </div>
   }
+
+  const mudaPrateleira = () => {
+    console.log("mudando")
+    axios
+    .put(`https://ka-users-api.herokuapp.com/users/501/books/711`,
+    {
+                
+      "book": {
+        "shelf": 3
+      }
+    
+      
+  },
+      
+    )
+    .then(resp => {
+      console.log(resp)
+    
+
+    })
+    .catch((error) => { // erro no request
+      console.log(error)
+    })
+  }
+
+
+
+
   return (
     <div> PRATELEIRAS
       <h1> Quero Ler</h1>
@@ -30,6 +59,8 @@ const Prateleiras = () => {
           <Card
             hoverable
             style={{ width: 200 }}
+            // onClick={() => console.log(book.id) }
+            onClick={() => mudaPrateleira(book.id) }
             cover={<img alt="example" src={book.image_url} />}
           >
             <Meta title={book.title} description="" />

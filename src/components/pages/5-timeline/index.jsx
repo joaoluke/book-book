@@ -35,9 +35,9 @@ const Timeline = () => {
     return state.timeline;
   })
   const dispatch = useDispatch();
-  console.log(getUser)
-  console.log(getId)
-  console.log(getToken)
+  // console.log(getUser)
+  // console.log(getId)
+  // console.log(getToken)
   const [listData, setData] = useState([]);
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
   const token = window.localStorage.getItem("authToken")
@@ -63,8 +63,8 @@ const Timeline = () => {
           size="large"
           pagination={{
             onChange: (page) => {
-              console.log(page);
-              console.log(listData)
+              // console.log(page);
+              // console.log(listData)
             },
             pageSize: 5,
           }}
@@ -75,7 +75,7 @@ const Timeline = () => {
             </div>
           }
           renderItem={(item) => {
-            console.log(item)
+            //console.log(item)
             return (
               <ListAntd.Item>
                 <StyledCardTimeline>
