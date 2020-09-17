@@ -10,6 +10,7 @@ const Prateleiras = () => {
 
   const userId = useSelector((state) => state.session.user.id)
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.session.token)
 
   useEffect(() => {
     userId && dispatch(requestUserBooks(userId)
@@ -24,47 +25,40 @@ const Prateleiras = () => {
     return <div> carregando </div>
   }
 
-  const mudaPrateleira = () => {
-    console.log("mudando")
+  const trocaPrateleira = (bookID) => {
+    console.log(bookID)
+    console.log(userId)
+    console.log(token)
     axios
-    .put(`https://ka-users-api.herokuapp.com/users/501/books/711`,
-    {
-                
-      "book": {
-        "shelf": 3
-      }
-    
-      
-  },
-      
+    .put(`https://ka-users-api.herokuapp.com/users/${userId}/books/${bookID}`,
+      {        
+        "book": {
+          "shelf": 3
+        }
+      },
+      { headers: { Authorization: token } }
     )
     .then(resp => {
       console.log(resp)
-    
-
     })
-    .catch((error) => { // erro no request
+    .catch((error) => { 
       console.log(error)
     })
   }
-
-
-
-
   return (
     <div> PRATELEIRAS
       <h1> Quero Ler</h1>
       {books.filter(({ shelf }) => shelf === 1).map((book, index) => (
+
         <>
           <Card
             hoverable
             style={{ width: 200 }}
             // onClick={() => console.log(book.id) }
-            onClick={() => mudaPrateleira(book.id) }
+            onClick={() => trocaPrateleira(book.id) }
             cover={<img alt="example" src={book.image_url} />}
           >
             <Meta title={book.title} description="" />
-            <button>  ---- LER ----   </button>
           </Card>
 
         </>
@@ -76,9 +70,11 @@ const Prateleiras = () => {
           <Card
             hoverable
             style={{ width: 200 }}
+            // onClick={() => console.log(book.id) }
+            onClick={() => trocaPrateleira(book.id) }
             cover={<img alt="example" src={book.image_url} />}
           >
-            <Meta title={book.title} description="" />
+            <Meta title={ book.title} description="" />
           </Card>
         </>
       ))}
@@ -86,12 +82,14 @@ const Prateleiras = () => {
       <h1> Lido </h1>
       {books.filter(({ shelf }) => shelf === 3).map((book, index) => (
         <>
-          <Card
+        <Card
             hoverable
             style={{ width: 200 }}
+            // onClick={() => console.log(book.id) }
+            onClick={() => trocaPrateleira(book.id) }
             cover={<img alt="example" src={book.image_url} />}
           >
-            <Meta title={book.title} description="" />
+            <Meta title={ book.title} description="" />
           </Card>
         </>
       ))}
