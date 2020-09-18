@@ -77,6 +77,7 @@ export const requestUserBooks = (userId) => (dispatch, getState) => {
     )
     .then(resp => {
       dispatch(setUserBooks(resp.data));
+      console.log(resp.data)
     })
     .catch((error) => { // erro no request
       console.log(error)
@@ -115,12 +116,10 @@ export const requestBookId = (book,userId,shelf) => (dispatch, getState) => {
   const { session } = getState()
   const bookId = book
   let NewShelf = shelf
-  // console.log(bookId)
-  // console.log(book)
-  // console.log(userId)
-  //console.log("teste thunk",bookId.Id )
+
   console.log("TESTE")
   NewShelf === 1 ? (NewShelf = 2) : (NewShelf = 3)
+  console.log(NewShelf)
   axios
   
     .put(`https://ka-users-api.herokuapp.com/users/${userId}/books/${bookId}`,
@@ -131,7 +130,8 @@ export const requestBookId = (book,userId,shelf) => (dispatch, getState) => {
       { headers: { Authorization: session.token  } }
     )
   .then(resp => {
-        dispatch(setBooksId(resp.data));
+      console.log("teste")
+        dispatch(requestUserBooks(userId));
   })
   .catch((error) => { 
     console.log(error)

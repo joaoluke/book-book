@@ -40,7 +40,7 @@ const Prateleiras = () => {
         <>
           <Card
             hoverable
-            style={{ width: 200 }}
+            style={{ width: 150 }}
             // onClick={() => console.log(book.id) }
             onClick={() => {  
               dispatch(requestBookId(book.id, userId,shelf))
@@ -54,13 +54,15 @@ const Prateleiras = () => {
 
         </>
       ))}
-
+        
+        <hr/> <hr/>
       <h1> Estou Lendo</h1>
+      
       {books.filter(({ shelf }) => shelf === 2).map((book, index) => (
         <>
           <Card
             hoverable
-            style={{ width: 200 }}
+            style={{ width: 150 }}
             // onClick={() => console.log(book.id) }
             onClick={() => {  
               dispatch(requestBookId(book.id, userId))
@@ -69,16 +71,18 @@ const Prateleiras = () => {
             cover={<img alt="example" src={book.image_url} />}
           >
             <Meta title={ book.title} description="" />
+           
           </Card>
         </>
       ))}
-
+      
+      <hr/><hr/>
       <h1> Lido </h1>
       {books.filter(({ shelf }) => shelf === 3).map((book, index) => (
         <>
         <Card
             hoverable
-            style={{ width: 200 }}
+            style={{ width: 150 }}
             // onClick={() => console.log(book.id) }
             onClick={() => {  
               dispatch(requestBookId(book.id, userId))
