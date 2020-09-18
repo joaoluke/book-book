@@ -20,32 +20,42 @@ import {
   StyledPopover,
   StyledPopoverContainer,
 } from '../../styles/styles.js'
+import { useDispatch } from 'react-redux';
+import { postUserBooks } from '../../../redux/actions';
 
 
 
 const Busca = () => {
+  const dispatch = useDispatch()
   const [book, setBook] = useState([]);
   const [searchBook, setSearchBook] = useState("javascript");
 
-
-  const queroLer = () => {
-    console.log("quero ler")
+  const addBook = (book) => {
+    console.log(book)
+    const values = {
+      book: {
+        author: book.volumeInfo.authors.join(""),
+        categories: book.volumeInfo.categories.join(""),
+        google_book_id: book.id,
+        grade: book.volumeInfo.averageRating,
+        id: "?",
+        image_url: book.volumeInfo.imageLinks.thumbnail,
+        review: "",
+        shelf: book.shelf,
+        title: book.volumeInfo.title,
+      }
+    }
+    console.log(book.volumeInfo.imageLinks.thumbnail)
+    console.log(book.volumeInfo.authors)
+    console.log(values)
+    dispatch(postUserBooks(values))
   }
 
-  const lendo = () => {
-    console.log("lendo")
-  }
-
-  const jali = () => {
-    console.log("ja li")
-  }
-
-
-  const content = (
+  const content = (book) => (
     <StyledPopoverContainer>
-      <StyledPopover onClick={queroLer} >Quero Ler</StyledPopover>
-      <StyledPopover onClick={lendo}>Quero Ler</StyledPopover>
-      <StyledPopover onClick={jali}>Quero Ler</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 1 })}>Quero Ler</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 2 })}>Lendo</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 3 })}>Já li</StyledPopover>
     </StyledPopoverContainer>
   );
 
@@ -85,8 +95,8 @@ const Busca = () => {
                   <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor>
                 </div>
                 <StyledBuscaCardButtonContainer>
-                  <Popover placement="right" content={content} trigger="click">
-                    <StyledBuscaCardButton>Adicionar</StyledBuscaCardButton>
+                  <Popover placement="right" content={content(book)} trigger="click">
+                    <StyledBuscaCardButton >Adicionar</StyledBuscaCardButton>
                   </Popover>
 
                 </StyledBuscaCardButtonContainer>

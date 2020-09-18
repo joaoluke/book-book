@@ -141,7 +141,7 @@ export const StyledCardSearch = styled(Card)`
 /*=TIMELINE=================================*/
 
 export const StyledCardTimeline = styled.div`
-background-color: #EEE;
+background-image: linear-gradient(to bottom right, #CCE, #EEE);
 height: 500px;
 width: 400px;
 position: relative;
@@ -217,12 +217,13 @@ color: #888;
 /* border: solid 2px blue; */
 `
 
-export const StyledTimelineButton = styled.button`
-color:blue;
+export const StyledTimelineButton = styled(Button)`
+background-color:#1890ff;
+color: white;
 padding: 0px 5px;
 position: absolute;
-top: 93%;
-left: 32%;
+top: 80%;
+left: 40%;
 `
 
 export const StyledForm = styled(Form)`
@@ -232,7 +233,7 @@ top: -50px;
 /*BUSCA=================================*/
 
 export const StyledBuscaCard = styled.div`
-background-image: linear-gradient(to bottom right, #CCE, #FFF);
+background-image: linear-gradient(to bottom right, #CCE, #EEE);
 height: 230px;
 width: 900px;
 display: flex;
