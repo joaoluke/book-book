@@ -300,3 +300,61 @@ color: white;*/
 export const StyledPopover = styled.p`
 cursor: pointer;
 `
+/*Prateleiras===================*/
+
+export const StyledPrateleiraContainer = styled.div`
+display: flex;
+flex-direction:row;
+justify-content: space-between;
+`
+
+export const StyledPrateleiraCard = styled.div`
+background-image: linear-gradient(to bottom right, #CCE, #EEE);
+height: 350px;
+width: 200px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+margin: 20px;
+padding:10px;
+`
+
+export const StyledPrateleiraImg = styled.img`
+margin: 20px;
+max-height:300px;
+alt: "logo";
+`
+
+export const StyledPrateleiraCardTitle = styled.h2`
+font-family: Poppins;
+  font-size: 1.4rem;
+  color: #888;
+  width: 180px;
+  text-align: justify;
+  position: relative;
+  line-height:120%;
+  position: relative;
+  top: -15px;
+`
+
+export const StyledPrateleiraCardAuthor = styled.div`
+ font-size: 1.2rem;
+  width: 180px;
+  text-align: justify;
+  position: relative;
+  top: -20px;
+`
+
+export const StyledPrateleiraReview = styled.div`
+font-size: 1.2rem;
+width: 180px;
+text-align: right;
+cursor: pointer;
+`
+
+export const StyledPrateleiraCardButton = styled.div`
+display: flex;
+justify-content: center;
+cursor: pointer;
+border-top: 1px solid #aaa;
+`
