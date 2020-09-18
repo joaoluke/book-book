@@ -3,7 +3,7 @@ import { Card } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { requestUserBooks } from '../../../redux/actions'
 import axios from 'axios'
-import { setBooksId } from '../../../redux/actions'
+import { setBooksId, requestBookId} from '../../../redux/actions'
 import Review from "../review"
 //feedback-- --------
 import { Form, Input, Button } from 'antd';
@@ -27,7 +27,7 @@ const Prateleiras = () => {
   const token = useSelector((state) => state.session.token)
   const bookId = useSelector((state) => state.shelf)
 
-  console.log (bookId)
+  
   useEffect(() => {
     userId && dispatch(requestUserBooks(userId)
     )
@@ -80,7 +80,9 @@ const Prateleiras = () => {
             style={{ width: 200 }}
             // onClick={() => console.log(book.id) }
             onClick={() => {  
-              dispatch(setBooksId(book.id))
+              dispatch(requestBookId(book.id, userId,shelf))
+              console.log(shelf)
+              
             }}
             cover={<img alt="example" src={book.image_url} />}
           >
@@ -98,7 +100,8 @@ const Prateleiras = () => {
             style={{ width: 200 }}
             // onClick={() => console.log(book.id) }
             onClick={() => {  
-              dispatch(setBooksId(book.id))
+              dispatch(requestBookId(book.id, userId))
+              console.log("teste botao")
             }}
             cover={<img alt="example" src={book.image_url} />}
           >
@@ -115,7 +118,8 @@ const Prateleiras = () => {
             style={{ width: 200 }}
             // onClick={() => console.log(book.id) }
             onClick={() => {  
-              dispatch(setBooksId(book.id))
+              dispatch(requestBookId(book.id, userId))
+              console.log("teste botao")
             }}
             cover={<img alt="example" src={book.image_url} />}
           >

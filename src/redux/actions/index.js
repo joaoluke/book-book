@@ -111,13 +111,22 @@ export const setBooksId = (bookId) => ({
   bookId,
 })
 
-export const requestBookId = (userId,bookId) => (dispatch, getState) => {
+export const requestBookId = (book,userId,shelf) => (dispatch, getState) => {
   const { session } = getState()
+  const bookId = book
+  let NewShelf = shelf
+  // console.log(bookId)
+  // console.log(book)
+  // console.log(userId)
+  //console.log("teste thunk",bookId.Id )
+  console.log("TESTE")
+  NewShelf === 1 ? (NewShelf = 2) : (NewShelf = 3)
   axios
+  
     .put(`https://ka-users-api.herokuapp.com/users/${userId}/books/${bookId}`,
       {        
         "book": {
-          "shelf": 3}
+          "shelf": NewShelf} 
       },
       { headers: { Authorization: session.token  } }
     )
@@ -127,25 +136,4 @@ export const requestBookId = (userId,bookId) => (dispatch, getState) => {
   .catch((error) => { 
     console.log(error)
   })
-}
-
-export const changeSelf= (bookId, session, currentShelf) => (dispatch) => {
-  axios
-    .put(
-      `https://ka-users-api.herokuapp.com/users/${session.user.id}/books/${bookId}`,
-      {
-        book: {
-          shelf: currentShelf + 1,
-        },
-      },
-      {
-        headers: {
-          Authorization: session.token,
-        },
-      }
-    )
-    .then(() => {
-    })
-    .catch((err) => console.log(err));
-  dispatch(changeShelf(bookId, session, currentShelf))
 }
