@@ -89,7 +89,7 @@ export const setBooks = (books) => ({
   books,
 })
 
-export const requestBooks = (userId) => (dispatch, getState) => {
+export const requestBooks = () => (dispatch, getState) => {
   const { session } = getState()
 
   axios

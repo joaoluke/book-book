@@ -311,5 +311,10 @@ export const StyledPopoverContainer = styled.div`
 `
 
 export const StyledPopover = styled.p`
-cursor: pointer;
+  cursor: pointer;
+`
+/*PERFIL=================================*/
+
+export const StyledProfileH4 = styled.h4`
+  margin: -2% auto 4% 12% !important;
 `

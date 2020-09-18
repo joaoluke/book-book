@@ -7,7 +7,7 @@ const prateleiras = (state = defaultState, action) => {
   switch (action.type) {
     case SET_USER_BOOKS:
     const {books} = action
-      return [...state,...books ];
+      return [...books ];
       
     default:
       return state;

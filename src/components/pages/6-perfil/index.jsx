@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Avatar, Space } from "antd";
+
+import { Space } from "antd";
 import { residences } from '../1-registration/residence'
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
 import {
+  StyledProfileH4,
   Div,
   ListAntd,
   StyledCardTimeline,
@@ -30,6 +32,8 @@ const IconText = ({ icon, text }) => (
 
 const Timeline = () => {
   const getName = useSelector((state) => state.session.user.name);
+  const getUser = useSelector((state) => state.session.user);
+  console.log(getUser)
   const getId = useSelector((state) => state.session.user.id);
   const getAddress = useSelector((state) => state.session.user.address);
   const getToken = useSelector((state) => state.session.token);
@@ -43,22 +47,26 @@ const Timeline = () => {
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
   const token = window.localStorage.getItem("authToken")
   const [searchBook, setSearchBook] = useState("javascript");
-  const [city, setCity] = useState("");
   const addPrateleira = () => {
     "dispatch livro - adicionar o livro na api! "
   }
 
+
   const getCity = () => {
-    residences.map(initial => 
-      initial.children.map(state => 
-        state.children.map(city => {
-          if (city.value == getAddress) {
-            console.log(city.label)
-            return city.label
+    for (let i = 0; i < residences.length; i++) {
+      for (let j = 0; j < residences[i].children.length; j++) {
+        for (let k = 0; k < residences[i].children[j].children.length; k++) {
+          if (residences[i].children[j].children[k].value === parseInt(getAddress)) {
+            console.log(residences[i].children[j].children[k].value)
+            return (
+              residences[i].children[j].children[k].label 
+              + ", " + 
+              residences[i].children[j].children[k].state
+            )
           }
-        })
-      )
-    )
+        }
+      }
+    }
   }
 
   useEffect(() => {
@@ -69,8 +77,9 @@ const Timeline = () => {
   return (
     < Div >
       <img className="user-photo" src={getImage} width="100"/> 
-      <h3 className="hello">{getCity()}</h3>
-      <h5></h5>
+      <h3 className="hello">{getName}</h3>
+      <StyledProfileH4>{getCity()}</StyledProfileH4>
+      <h3>Livros que </h3>
       <div>
         <ListAntd
           itemLayout="vertical"
