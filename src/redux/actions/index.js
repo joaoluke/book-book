@@ -7,6 +7,7 @@ export const LOADING = 'LOADING'
 export const SETLIST = 'SETLIST' //  timeline
 export const SET_USER_BOOKS = 'SET_USER_BOOKS' // prateleiras
 export const SET_BOOKS = 'SET_BOOKS'
+export const SET_ID_BOOK = 'SET_ID_BOOK' // id livro pra troca prateleira
 
 
 export const login = (token, user) => ({
@@ -101,4 +102,50 @@ export const requestBooks = (userId) => (dispatch, getState) => {
     .catch((error) => { // erro no request
       console.log(error)
     })
+}
+
+// ******************Troca de Prateleira
+
+export const setBooksId = (bookId) => ({ 
+  type: SET_ID_BOOK,
+  bookId,
+})
+
+export const requestBookId = (userId,bookId) => (dispatch, getState) => {
+  const { session } = getState()
+  axios
+    .put(`https://ka-users-api.herokuapp.com/users/${userId}/books/${bookId}`,
+      {        
+        "book": {
+          "shelf": 3}
+      },
+      { headers: { Authorization: session.token  } }
+    )
+  .then(resp => {
+        dispatch(setBooksId(resp.data));
+  })
+  .catch((error) => { 
+    console.log(error)
+  })
+}
+
+export const changeSelf= (bookId, session, currentShelf) => (dispatch) => {
+  axios
+    .put(
+      `https://ka-users-api.herokuapp.com/users/${session.user.id}/books/${bookId}`,
+      {
+        book: {
+          shelf: currentShelf + 1,
+        },
+      },
+      {
+        headers: {
+          Authorization: session.token,
+        },
+      }
+    )
+    .then(() => {
+    })
+    .catch((err) => console.log(err));
+  dispatch(changeShelf(bookId, session, currentShelf))
 }

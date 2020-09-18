@@ -11,8 +11,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-
-
 function App() {
   const [visible, setVisible] = useState(false);
 

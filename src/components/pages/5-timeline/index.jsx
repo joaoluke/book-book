@@ -50,9 +50,9 @@ const Timeline = () => {
 
   useEffect(() => {
     dispatch(requestBooks(getId));
+    
   }, [dispatch, getId])
-
-
+  
   return (
     < Div >
       <h1>Olá {getUser}</h1>
