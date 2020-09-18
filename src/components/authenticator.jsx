@@ -13,7 +13,7 @@ import {
 } from '../redux/actions'
 import 'antd/dist/antd.css';
 import logo from "../images/books-login.svg";
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 import {
   LoginHeader,
   LoginSlogan,
@@ -107,8 +107,8 @@ const Authenticator = () => {
         </Route>
 
         <Route path="/busca">
+          <Header />
           <Busca />
-          <Prateleiras></Prateleiras>
         </Route>
 
         <Route path="/timeline/">

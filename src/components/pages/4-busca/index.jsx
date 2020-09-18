@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "../../../App.css"
-import { Input, Typography, Button, Popover } from "antd";
+import {
+  Popover,
+  notification
+} from "antd";
 import {
   StyledH1,
   StyledBodySearch,
   StyledInputSearch,
-  StyledCardSearch,
   StyledBuscaCard,
   StyledBuscaImg,
   StyledBuscaCardTextContainer,
   StyledBuscaCardTitle,
   StyledBuscaCardAuthor,
-  StyledBuscaCardYear,
   StyledBuscaCardDescription,
   StyledBuscaCardButton,
-  StyledTimelineCardSubtitle,
   StyledBuscaCardTopTextContainer,
   StyledBuscaCardButtonContainer,
   StyledPopover,
@@ -28,14 +28,32 @@ import { postUserBooks } from '../../../redux/actions';
 const Busca = () => {
   const dispatch = useDispatch()
   const [book, setBook] = useState([]);
-  const [searchBook, setSearchBook] = useState("javascript");
+  const [searchBook, setSearchBook] = useState("");
+
+  const openNotificationWithIcon = type => {
+    if (type === "success") {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Livro adicionado à prateleira!',
+      });
+    }
+    else {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Erro! tente novamente.',
+      });
+    }
+  };
+
 
   const addBook = (book) => {
     console.log(book)
     const values = {
       book: {
         author: book.volumeInfo.authors.join(""),
-        categories: book.volumeInfo.categories.join(""),
+        categories: (book.volumeInfo.categories ? book.volumeInfo.categories.join("") : ""),
         google_book_id: book.id,
         grade: book.volumeInfo.averageRating,
         id: "?",
@@ -45,10 +63,8 @@ const Busca = () => {
         title: book.volumeInfo.title,
       }
     }
-    console.log(book.volumeInfo.imageLinks.thumbnail)
-    console.log(book.volumeInfo.authors)
-    console.log(values)
     dispatch(postUserBooks(values))
+    openNotificationWithIcon('success')
   }
 
   const content = (book) => (
@@ -92,7 +108,9 @@ const Busca = () => {
               <StyledBuscaCardTopTextContainer>
                 <div>
                   <StyledBuscaCardTitle>{book.volumeInfo.title}</StyledBuscaCardTitle>
-                  <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor>
+                  {book.volumeInfo.authors ?
+                    <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor> :
+                    <StyledBuscaCardAuthor>Autor não informado</StyledBuscaCardAuthor>}
                 </div>
                 <StyledBuscaCardButtonContainer>
                   <Popover placement="right" content={content(book)} trigger="click">

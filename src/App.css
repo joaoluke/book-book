@@ -28,17 +28,6 @@ header {
   margin: 50% 10% auto auto;
 }
 
-/*.ant-popover-content {
- background-color: #aaa;
-}*/
-
-/*.ant-popover-arrow {
-  border-top-color: #aaa;
-  border-right-color: #aaa;
-  border-bottom-color: #aaa;
-  border-left-color: #aaa;
- }*/
-
  .ant-popover-placement-left > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-leftTop > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-leftBottom > .ant-popover-content > .ant-popover-arrow {
 
   border-top-color: #aaa !important;

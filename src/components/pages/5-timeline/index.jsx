@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Avatar, Space, Popover } from "antd";
+import { Avatar, Space, Popover, notification } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
 import {
@@ -38,6 +38,24 @@ const Timeline = () => {
     return state.timeline;
   })
 
+  const openNotificationWithIcon = type => {
+    if (type === "success") {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Livro adicionado à prateleira!',
+      });
+    }
+    else {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Erro! tente novamente.',
+      });
+    }
+  };
+
+
   const content = (book) => (
     <StyledPopoverContainer>
       <StyledPopover onClick={() => addBook({ ...book, shelf: 1 })}>Quero Ler</StyledPopover>
@@ -73,6 +91,7 @@ const Timeline = () => {
     }
     console.log(values)
     dispatch(postUserBooks(values))
+    openNotificationWithIcon('success')
   }
 
   useEffect(() => {
@@ -109,8 +128,10 @@ const Timeline = () => {
                 <StyledCardTimeline>
                   <StyledTimelineCardUserContainer>
                     {item.creator.image_url ?
-                      <StyledTimelineCardAvatar> {item.creator.image_url}</StyledTimelineCardAvatar> :
-                      <StyledTimelineCardAvatar> {item.creator.user[0].toUpperCase()} </StyledTimelineCardAvatar>}
+                      <StyledTimelineCardAvatar> {item.creator.image_url}</StyledTimelineCardAvatar> : (
+                        item.creator.user ?
+                          <StyledTimelineCardAvatar> {item.creator.user[0].toUpperCase()} </StyledTimelineCardAvatar> :
+                          <StyledTimelineCardAvatar>U</StyledTimelineCardAvatar>)}
                     <StyledTimelineCardUser>{item.creator.user}</StyledTimelineCardUser>
                   </StyledTimelineCardUserContainer>
                   <StyledTimelineCardTopText>

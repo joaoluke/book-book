@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { Input, Typography, Card } from "antd";
 import { List, Form } from "antd";
 import {
-  Modal,
-  Item,
   Button,
 } from "antd";
 
