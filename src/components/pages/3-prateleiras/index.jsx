@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Card } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { requestUserBooks } from '../../../redux/actions'
-import axios from 'axios'
-import { setBooksId, requestBookId} from '../../../redux/actions'
+
+import { requestBookId} from '../../../redux/actions'
 import Review from "../review"
-//feedback-- --------
-import { Form, Input, Button } from 'antd';
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-//--------------------------
 
 
 const { Meta } = Card;
@@ -31,7 +20,7 @@ const Prateleiras = () => {
   useEffect(() => {
     userId && dispatch(requestUserBooks(userId)
     )
-  }, [dispatch, userId])
+  }, [dispatch, userId, bookId])
 
   const books = useSelector((state) => {
     return state.books
@@ -40,32 +29,6 @@ const Prateleiras = () => {
   if (books.length <= 0) {
     return <div> carregando </div>
   }
-
-  
-
-//---------Troca Prateleira------------------------------------------------------
-  // const trocaPrateleira = (bookId, bookShelf, book) => {
-  //    dispatch(setBooksId(bookId))
-   
-  //   shelf === 1 ? (shelf = 2) : (shelf = 3)
-   
-  //   axios
-  //   .put(`https://ka-users-api.herokuapp.com/users/${userId}/books/${bookId}`,
-  //     {        
-  //       "book": {
-  //         "shelf": shelf
-  //       }
-  //     },
-  //     { headers: { Authorization: token } }
-  //   )
-  //   .then(resp => {
-  //     console.log(resp)
-  //   })
-  //   .catch((error) => { 
-  //     console.log(error)
-  //   })
-  // }
-
 
 //-----------------------------------------------------------------------
   return (
@@ -81,7 +44,7 @@ const Prateleiras = () => {
             // onClick={() => console.log(book.id) }
             onClick={() => {  
               dispatch(requestBookId(book.id, userId,shelf))
-              console.log(shelf)
+
               
             }}
             cover={<img alt="example" src={book.image_url} />}
@@ -101,7 +64,7 @@ const Prateleiras = () => {
             // onClick={() => console.log(book.id) }
             onClick={() => {  
               dispatch(requestBookId(book.id, userId))
-              console.log("teste botao")
+       
             }}
             cover={<img alt="example" src={book.image_url} />}
           >
@@ -119,7 +82,7 @@ const Prateleiras = () => {
             // onClick={() => console.log(book.id) }
             onClick={() => {  
               dispatch(requestBookId(book.id, userId))
-              console.log("teste botao")
+     
             }}
             cover={<img alt="example" src={book.image_url} />}
           >
