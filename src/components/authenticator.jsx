@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react"
-import { Switch, Route, useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import Timeline from './pages/5-timeline'
-import Shelf from "./pages/3-prateleiras"
-import WindowInitial from './pages/2-login'
-import Registration from './pages/1-registration'
-import Busca from './pages/4-busca'
-import Header from './header'
+import React, { useEffect, useState } from "react";
+import { Switch, Route, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import Timeline from './pages/5-timeline';
+import WindowInitial from './pages/2-login';
+import Registration from './pages/1-registration';
+import Shelf from './pages/3-prateleiras';
+import Busca from './pages/4-busca';
+import Header from './header';
+import Profile from './pages/6-perfil'
 import {
   requestValidate,
   logout,
@@ -14,9 +15,9 @@ import {
 import 'antd/dist/antd.css';
 import logo from "../images/books-login.svg";
 import { Modal, Button } from "antd";
-import { 
-  LoginHeader, 
-  LoginSlogan, 
+import {
+  LoginHeader,
+  LoginSlogan,
   LoginImage,
   LoginA,
 } from "./styles/styles"
@@ -48,7 +49,7 @@ const Authenticator = () => {
   }
 
   const doBusca = () => {
-    history.push('/busca')
+    history.push('/search')
   }
 
   const doShelf = () => {
@@ -57,6 +58,10 @@ const Authenticator = () => {
 
   const doTimeline = () => {
     history.push('/timeline')
+  }
+
+  const doPerfil = () => {
+    history.push('/profile')
   }
 
   useEffect(() => {
@@ -87,7 +92,7 @@ const Authenticator = () => {
               onOk={handleOk}
               onCancel={handleCancel}
             >
-              <Registration setVisible={setVisible}/>
+              <Registration setVisible={setVisible} />
             </Modal>
           </Route>
         </Switch>
@@ -101,13 +106,22 @@ const Authenticator = () => {
       <button onClick={doBusca}>BUSCA</button>
       <button onClick={doTimeline}>TIMELINE</button>
       <button onClick={doShelf}>PRATELEIRAS</button>
+      <button onClick={doPerfil}>PERFIL</button>
       <Switch>
         <Route path="/shelf">
+          <Header />
           <Shelf />
         </Route>
 
-        <Route path="/busca">
+        <Route path="/search">
+          <Header />
           <Busca />
+          <Shelf></Shelf>
+        </Route>
+
+        <Route path="/profile">
+          <Header />
+          <Profile></Profile>
         </Route>
 
         <Route path="/timeline/">

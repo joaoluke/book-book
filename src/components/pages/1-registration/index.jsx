@@ -10,11 +10,12 @@ import {
   AutoComplete,
   message,
   notification,
-  
+
 } from 'antd';
 import { QuestionCircleOutlined, UploadOutlined } from '@ant-design/icons';
 import { residences } from "./residence.js";
 import axios from 'axios';
+import { StyledForm } from '../../styles/styles'
 import "./style/style.css"
 import { RegisterItem } from "../../styles/styles"
 
@@ -88,13 +89,13 @@ const Registration = ({ setVisible }) => {
         "address": values.residence[2],
       }
     })
-    .then(() => {
-      openNotificationWithIcon('success')
-      setVisible(false);
-    })
-    .catch(error => {
-      openNotificationWithIcon('error')
-    })
+      .then(() => {
+        openNotificationWithIcon('success')
+        setVisible(false);
+      })
+      .catch(error => {
+        openNotificationWithIcon('error')
+      })
   };
 
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
@@ -130,9 +131,9 @@ const Registration = ({ setVisible }) => {
     label: website,
     value: website,
   }))
-  
+
   return (
-    <Form
+    <StyledForm
       {...formItemLayout}
       form={form}
       name="register"
@@ -168,7 +169,7 @@ const Registration = ({ setVisible }) => {
           </span>
         }
       >
-        <Input placeholder="https://imagefromweb"/>
+        <Input placeholder="https://imagefromweb" />
       </Form.Item>
 
       <Form.Item
@@ -282,7 +283,7 @@ const Registration = ({ setVisible }) => {
           Register
         </Button>
       </Form.Item>
-    </Form>
+    </StyledForm>
   );
 };
 

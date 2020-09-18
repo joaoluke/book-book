@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import "./style/index.css"
 import { Avatar, Space } from "antd";
+import { residences } from '../1-registration/residence'
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import axios from 'axios'
 import {
@@ -29,23 +29,37 @@ const IconText = ({ icon, text }) => (
 );
 
 const Timeline = () => {
-  const getUser = useSelector((state) => state.session.user.user);
+  const getName = useSelector((state) => state.session.user.name);
   const getId = useSelector((state) => state.session.user.id);
+  const getAddress = useSelector((state) => state.session.user.address);
   const getToken = useSelector((state) => state.session.token);
   const getImage = useSelector((state) => state.session.user.image_url);
   const books = useSelector((state) => {
     return state.timeline;
   })
+  console.log(getAddress)
   const dispatch = useDispatch();
   const [listData, setData] = useState([]);
   const url = "https://ka-users-api.herokuapp.com/book_reviews"
   const token = window.localStorage.getItem("authToken")
   const [searchBook, setSearchBook] = useState("javascript");
-  const [book, setBook] = useState([]);
+  const [city, setCity] = useState("");
   const addPrateleira = () => {
     "dispatch livro - adicionar o livro na api! "
   }
 
+  const getCity = () => {
+    residences.map(initial => 
+      initial.children.map(state => 
+        state.children.map(city => {
+          if (city.value == getAddress) {
+            console.log(city.label)
+            return city.label
+          }
+        })
+      )
+    )
+  }
 
   useEffect(() => {
     dispatch(requestBooks(getId));
@@ -55,7 +69,8 @@ const Timeline = () => {
   return (
     < Div >
       <img className="user-photo" src={getImage} width="100"/> 
-      <h3 className="hello">Olá {getUser}, o que vai ler hoje?</h3>
+      <h3 className="hello">{getCity()}</h3>
+      <h5></h5>
       <div>
         <ListAntd
           itemLayout="vertical"

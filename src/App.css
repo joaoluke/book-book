@@ -28,6 +28,27 @@ header {
   margin: 50% 10% auto auto;
 }
 
+.ant-popover-content {
+ background-color: #aaa;
+}
+
+.ant-popover-arrow {
+  border-top-color: #aaa;
+  border-right-color: #aaa;
+  border-bottom-color: #aaa;
+  border-left-color: #aaa;
+}
+
+.ant-btn .ant-btn-primary .ant-btn-lg .ant-input-search-button {
+  background-color: #4951EC;
+}
+
+
+.ant-popover-inner-content{
+  background-color: #aaa;
+ }
+
+
 Registration {
   width: 100%;
   position: absolute;
