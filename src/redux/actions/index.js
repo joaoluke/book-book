@@ -5,9 +5,11 @@ export const TRUE = 'TRUE'
 export const FALSE = 'FALSE'
 export const LOADING = 'LOADING'
 export const SETLIST = 'SETLIST' //  timeline
-export const SET_USER_BOOKS = 'SET_USER_BOOKS' // prateleiras
+export const SET_USER_BOOKS = 'SET_USER_BOOKS'
+export const SET_USER_BOOK = 'SET_USER_BOOK' // prateleiras
 export const SET_BOOKS = 'SET_BOOKS'
 export const SET_ID_BOOK = 'SET_ID_BOOK' // id livro pra troca prateleira
+export const ADD_BOOKS = 'ADD_BOOKS'
 
 
 export const login = (token, user) => ({
@@ -69,6 +71,11 @@ export const setUserBooks = (books) => ({
   books,
 })
 
+export const setUserBook = (book) => ({
+  type: SET_USER_BOOK,
+  book,
+})
+
 export const requestUserBooks = (userId) => (dispatch, getState) => {
   const { session } = getState()
   axios
@@ -91,7 +98,7 @@ export const setBooks = (books) => ({
   books,
 })
 
-export const requestBooks = (userId) => (dispatch, getState) => {
+export const requestBooks = () => (dispatch, getState) => {
   const { session } = getState()
   axios
     .get(`https://ka-users-api.herokuapp.com/book_reviews`,
@@ -136,4 +143,25 @@ export const requestBookId = (book,userId,shelf) => (dispatch, getState) => {
   .catch((error) => { 
     console.log(error)
   })
+}
+
+export const addBooks = () => ({
+  type: ADD_BOOKS
+})
+
+export const postUserBooks = (values) => (dispatch, getState) => {
+  const { session } = getState()
+  console.log(values)
+  console.log(session)
+  axios.post(`https://ka-users-api.herokuapp.com/users/${session.user.id}/books`, values, {
+    headers: {
+      'Authorization': session.token,
+      'Content-Type': 'application/json'
+    },
+  })
+    .then((res) => dispatch(setUserBook(values)))
+
+    .catch((error) => { // erro no request
+      console.log(error)
+    })
 }

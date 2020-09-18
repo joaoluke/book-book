@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [visible, setVisible] = useState(false);
+  /*const [visible, setVisible] = useState(false);
 
   const showModal = () => {
     setVisible(true);
@@ -26,7 +26,7 @@ function App() {
   const handleCancel = e => {
     console.log(e);
     setVisible(false);
-  };
+  };*/
 
 
   return (

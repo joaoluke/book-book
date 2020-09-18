@@ -1,4 +1,4 @@
-import { SET_USER_BOOKS } from '../actions';
+import { SET_USER_BOOKS, SET_USER_BOOK } from '../actions';
 
 const defaultState = [];
 

@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { Input, Typography, Card } from "antd";
 import { List, Form } from "antd";
 import {
-  Modal,
-  Item
+  Button,
 } from "antd";
 
 
@@ -137,8 +136,10 @@ export const StyledCardSearch = styled(Card)`
 
 
 
+/*=TIMELINE=================================*/
+
 export const StyledCardTimeline = styled.div`
-background-color: #EEE;
+background-image: linear-gradient(to bottom right, #CCE, #EEE);
 height: 500px;
 width: 400px;
 position: relative;
@@ -214,13 +215,88 @@ color: #888;
 /* border: solid 2px blue; */
 `
 
-export const StyledTimelineButton = styled.button`
-color:blue;
+export const StyledTimelineButton = styled(Button)`
+background-color:#1890ff;
+color: white;
 padding: 0px 5px;
 position: absolute;
-top: 93%;
-left: 32%;
+top: 80%;
+left: 40%;
 `
 
 export const StyledForm = styled(Form)`
-top: -50px`
+top: -50px;
+`
+
+/*BUSCA=================================*/
+
+export const StyledBuscaCard = styled.div`
+background-image: linear-gradient(to bottom right, #CCE, #EEE);
+height: 230px;
+width: 900px;
+display: flex;
+margin: 50px;
+padding-right: 20px;
+`
+
+export const StyledBuscaImg = styled.img`
+margin: 20px;
+max-height:190px;
+alt: "logo";
+`
+
+export const StyledBuscaCardTextContainer = styled.div`
+`
+
+export const StyledBuscaCardTopTextContainer = styled.div`
+display: flex;
+justify-content: space-between;
+margin-top: 40px;
+`
+
+
+export const StyledBuscaCardTitle = styled.h2`
+font-family: Poppins;
+  font-size: 2rem;
+  color: #888;
+  width: 400px;
+  text-align: justify;
+  position: relative;
+  top: -20px;
+`
+
+export const StyledBuscaCardAuthor = styled.div`
+ font-size: 1.2rem;
+  width: 400px;
+  text-align: justify;
+  position: relative;
+  top: -30px;
+`
+
+export const StyledBuscaCardButtonContainer = styled.div`
+`
+
+
+export const StyledBuscaCardButton = styled(Button)`
+background-color:#1890ff;
+color: white;
+margin-right:30px;
+
+`
+
+export const StyledBuscaCardYear = styled.div`
+`
+
+export const StyledBuscaCardDescription = styled.div`
+font-size: 1.5rem;
+text-align: justify;
+`
+
+export const StyledPopoverContainer = styled.div`
+/*background-color: #aaa;
+color: white;*/
+`
+
+export const StyledPopover = styled.p`
+cursor: pointer;
+`

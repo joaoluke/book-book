@@ -28,6 +28,26 @@ header {
   margin: 50% 10% auto auto;
 }
 
+ .ant-popover-placement-left > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-leftTop > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-leftBottom > .ant-popover-content > .ant-popover-arrow {
+
+  border-top-color: #aaa !important;
+  border-right-color: #aaa  !important;
+  border-bottom-color: transparent  !important;
+  border-left-color: transparent  !important;
+ }
+
+ .ant-popover-placement-right > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-rightTop > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-rightBottom > .ant-popover-content > .ant-popover-arrow {
+  border-top-color: transparent !important;
+  border-right-color: transparent  !important;
+  border-bottom-color: #aaa  !important;
+  border-left-color: #aaa  !important;
+ }
+
+.ant-popover-inner-content{
+  background-color: #aaa;
+ }
+
+
 Registration {
   width: 100%;
   position: absolute;
