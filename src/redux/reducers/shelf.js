@@ -2,17 +2,17 @@
 
 //troca de prateleira
 //Grava o id do livro clicado na prateleira
-import { SET_ID_BOOK } from '../actions' 
+import { SET_ID_BOOK } from '../actions'
 
 const defaultState = {
-     bookId : 0
+  bookId: 0
 }
- 
-const  shelf= (state = defaultState, action) => {
+
+const shelf = (state = defaultState, action) => {
   switch (action.type) {
     case SET_ID_BOOK:
-      const {bookId} = action 
-      return {...state, bookId};
+      const { bookId } = action
+      return { ...state, bookId };
 
     default:
       return state;

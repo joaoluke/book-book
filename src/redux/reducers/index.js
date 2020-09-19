@@ -5,4 +5,4 @@ import timeline from './timeline'
 import books from './books'
 import shelf from './shelf'
 
-export default combineReducers({ session, authenticate, timeline, books , shelf});
+export default combineReducers({ session, authenticate, timeline, books, shelf });
