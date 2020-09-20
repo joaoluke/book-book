@@ -99,9 +99,9 @@ const Timeline = () => {
 
   useEffect(() => {
     dispatch(requestBooks(getId));
-    
+
   }, [dispatch, getId])
-  
+
   return (
     < Div >
       <h1>Olá {getUser}</h1>
@@ -138,7 +138,7 @@ const Timeline = () => {
                   </StyledTimelineCardUserContainer>
                   <StyledTimelineCardTopText>
                     <StyledTimelineAuthor>Este livro foi escrito por: {item.author}</StyledTimelineAuthor>
-                    {item.grade ? <div>Avaliação: {item.grade}/5</div> : <div>Não Avaliado</div>}
+                    {item.grade ? <div>Avaliação: {item.grade}/10</div> : <div>Não Avaliado</div>}
                   </StyledTimelineCardTopText>
                   <StyledTimelineImg src={item.image_url} />
                   <StyledTimelineCardTitle>

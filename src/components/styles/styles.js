@@ -305,7 +305,8 @@ cursor: pointer;
 export const StyledPrateleiraContainer = styled.div`
 display: flex;
 flex-direction:row;
-justify-content: space-between;
+justify-content: flex-start;
+flex-wrap: wrap;
 `
 
 export const StyledPrateleiraCard = styled.div`
@@ -357,4 +358,16 @@ display: flex;
 justify-content: center;
 cursor: pointer;
 border-top: 1px solid #aaa;
+`
+
+export const StyledPrateleiraGrade = styled.div`
+font-size: 1.2rem;
+width: 180px;
+text-align: left;
+cursor: pointer;
+`
+
+export const StyledPrateleiraReviewContainer = styled.div`
+display: flex;
+justify-content: space-between;
 `
