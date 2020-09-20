@@ -47,6 +47,10 @@ header {
   background-color: #aaa;
  }
 
+ .ant-btn .ant-btn-primary .ant-btn-lg .ant-input-search-button {
+  background-color: #4951EC;
+}
+
 
 Registration {
   width: 100%;

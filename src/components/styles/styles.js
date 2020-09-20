@@ -117,7 +117,7 @@ export const Header = styled.header`
 `;
 
 export const StyledH1 = styled(Title)`
-  color: #0b0754;
+  color: #4951EC !important;
 `;
 
 export const StyledBodySearch = styled.div`
@@ -139,20 +139,19 @@ export const StyledCardSearch = styled(Card)`
 /*=TIMELINE=================================*/
 
 export const StyledCardTimeline = styled.div`
-background-image: linear-gradient(to bottom right, #CCE, #EEE);
-height: 500px;
-width: 400px;
+background-color: #FFF;
+height: auto;
+width: 490px;
 position: relative;
 left: 50px;
 margin: 0px;
 padding: 5px;
-/* border: 5px solid black; */
+border-radius: 10px;
 `
 export const StyledTimelineCardUserContainer = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
-/* border: solid 2px blue; */
 margin-bottom: 5px;
 `
 
@@ -171,6 +170,8 @@ justify-content:center;
 
 export const StyledTimelineCardUser = styled.div`
 padding-left: 5px;
+font-weight: bold;
+color: rgba(11,7,84,0.85);
 `
 
 export const StyledTimelineCardTopText = styled.div`
@@ -182,12 +183,14 @@ justify-content:space-between;
 export const StyledTimelineAuthor = styled.div`
 width: 300px;
 font-size: 1.5rem;
-color: blue;
-/* border: solid 2px blue; */
+color: #2f2f2f;
+text-align: left;
+margin-left: 1rem;
 `
 
 export const StyledTimelineImg = styled.img`
-margin-top: 10px;
+margin: 13px;
+width: 65%;
 max-width: 272px;
 max-height:300px;
 alt: "logo";
@@ -201,7 +204,7 @@ justify-content: flex-start; */
 h2 { 
   font-family: Poppins;
   font-size: 2rem;
-  color: #888;
+  color:  #979797;
   text-align: justify;
   margin-left: 60px;
   width: 270px
@@ -216,12 +219,10 @@ color: #888;
 `
 
 export const StyledTimelineButton = styled(Button)`
-background-color:#1890ff;
-color: white;
+color: #000;
 padding: 0px 5px;
-position: absolute;
-top: 80%;
-left: 40%;
+position: relative;
+margin-top: 21px;
 `
 
 export const StyledForm = styled(Form)`
@@ -231,17 +232,20 @@ top: -50px;
 /*BUSCA=================================*/
 
 export const StyledBuscaCard = styled.div`
-background-image: linear-gradient(to bottom right, #CCE, #EEE);
-height: 230px;
-width: 900px;
-display: flex;
-margin: 50px;
-padding-right: 20px;
+  background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.05), #FFF);
+  height: 230px;
+  width: 900px;
+  display: flex;
+  margin: 50px;
+  padding-right: 20px;
+  border-radius: 10px;
+  border: solid 1px rgba(0,0,0,0.09);
 `
 
 export const StyledBuscaImg = styled.img`
 margin: 20px;
-max-height:190px;
+width: 150px;
+height:190px;
 alt: "logo";
 `
 
@@ -263,14 +267,18 @@ font-family: Poppins;
   text-align: justify;
   position: relative;
   top: -20px;
+  width: 45rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const StyledBuscaCardAuthor = styled.div`
- font-size: 1.2rem;
+   font-size: 1.2rem;
   width: 400px;
   text-align: justify;
   position: relative;
-  top: -30px;
+  top: -27px;
 `
 
 export const StyledBuscaCardButtonContainer = styled.div`
@@ -278,10 +286,10 @@ export const StyledBuscaCardButtonContainer = styled.div`
 
 
 export const StyledBuscaCardButton = styled(Button)`
-background-color:#1890ff;
-color: white;
-margin-right:30px;
-
+border-radius: 21px;
+  background-color: #4951EC;
+  color: white;
+  margin-right:30px;
 `
 
 export const StyledBuscaCardYear = styled.div`
@@ -289,7 +297,11 @@ export const StyledBuscaCardYear = styled.div`
 
 export const StyledBuscaCardDescription = styled.div`
 font-size: 1.5rem;
-text-align: justify;
+  text-align: justify;
+  width: 47em;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  height: 95px;
 `
 
 export const StyledPopoverContainer = styled.div`
@@ -310,7 +322,7 @@ flex-wrap: wrap;
 `
 
 export const StyledPrateleiraCard = styled.div`
-background-image: linear-gradient(to bottom right, #CCE, #EEE);
+background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.05), #FFF);
 height: 350px;
 width: 200px;
 display: flex;
@@ -318,6 +330,8 @@ flex-direction: column;
 justify-content: space-between;
 margin: 20px;
 padding:10px;
+border-radius: 10px;
+border: solid 1px rgba(0,0,0,0.09);
 `
 
 export const StyledPrateleiraImg = styled.img`

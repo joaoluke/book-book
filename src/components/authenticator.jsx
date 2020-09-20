@@ -42,6 +42,9 @@ const Authenticator = () => {
   const history = useHistory()
   const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
 
+
+  //OBS APAGAR ESSAS FUNÇÕES DEPOIS DE COLOCAR NO HEADER DAQUI
+
   const doLogout = () => {
     dispatch(logout())
     history.push('/')
@@ -58,6 +61,11 @@ const Authenticator = () => {
   const doPrateleiras = () => {
     history.push('/prateleiras')
   }
+
+  // ATÉ AQUI
+
+
+
 
   useEffect(() => {
     dispatch(requestValidate())
@@ -103,6 +111,7 @@ const Authenticator = () => {
       <button onClick={doPrateleiras}>PRATELEIRAS</button>
       <Switch>
         <Route path="/prateleiras">
+          <Header />
           <Prateleiras />
         </Route>
 
