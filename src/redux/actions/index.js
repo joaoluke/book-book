@@ -4,11 +4,11 @@ export const LOGOUT = 'LOGOUT'
 export const TRUE = 'TRUE'
 export const FALSE = 'FALSE'
 export const LOADING = 'LOADING'
-export const SETLIST = 'SETLIST' //  timeline
+export const SETLIST = 'SETLIST'
 export const SET_USER_BOOKS = 'SET_USER_BOOKS'
-export const SET_USER_BOOK = 'SET_USER_BOOK' // prateleiras
+export const SET_USER_BOOK = 'SET_USER_BOOK'
 export const SET_BOOKS = 'SET_BOOKS'
-export const SET_ID_BOOK = 'SET_ID_BOOK' // id livro pra troca prateleira
+export const SET_ID_BOOK = 'SET_ID_BOOK'
 export const ADD_BOOKS = 'ADD_BOOKS'
 
 
@@ -122,27 +122,22 @@ export const setBooksId = (bookId) => ({
 export const requestBookId = (book, userId, shelf) => (dispatch, getState) => {
   const { session } = getState()
   const bookId = book
-  let NewShelf = shelf
+  //let NewShelf = shelf
+  //NewShelf === 1 ? (NewShelf = 2) : (NewShelf = 3)
 
-  console.log("TESTE")
-  NewShelf === 1 ? (NewShelf = 2) : (NewShelf = 3)
-  console.log(NewShelf)
   axios
-
     .put(`https://ka-users-api.herokuapp.com/users/${userId}/books/${bookId}`,
       {
         "book": {
-          "shelf": NewShelf
+          "shelf": shelf
         }
       },
       { headers: { Authorization: session.token } }
     )
     .then(resp => {
-      console.log("teste")
       dispatch(requestUserBooks(userId));
     })
     .catch((error) => {
-      console.log(error)
     })
 }
 

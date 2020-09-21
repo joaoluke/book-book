@@ -131,14 +131,7 @@ const Prateleiras = () => {
 
   const changeShelf = (book, shelf) => {
     console.log(book)
-    axios.put(`https://ka-users-api.herokuapp.com/users/${getId}/books/${book.id}`,
-      {
-        "book": {
-          "shelf": shelf
-        }
-      },
-      { headers: { Authorization: getToken } }
-    )
+    dispatch(requestBookId(book.id, userId, shelf))
     changeShelfNotification("success")
   }
 

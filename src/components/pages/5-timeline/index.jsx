@@ -19,6 +19,8 @@ import {
   StyledPopover,
   StyledPopoverContainer,
   StyledTimelineText,
+  StyledTimelineContainer,
+  StyledTimelineTitle,
 } from "../../styles/styles";
 import { useDispatch, useSelector } from 'react-redux';
 import { requestBooks, postUserBooks } from '../../../redux/actions';
@@ -105,7 +107,7 @@ const Timeline = () => {
 
   return (
     < Div >
-      <h1>Olá {getUser}!</h1>
+      <StyledTimelineTitle>Olá {getUser}!</StyledTimelineTitle>
       <StyledTimelineText>Timeline</StyledTimelineText>
       <div>
         <ListAntd
@@ -122,7 +124,7 @@ const Timeline = () => {
           renderItem={(item) => {
             //console.log(item)
             return (
-              <ListAntd.Item>
+              <StyledTimelineContainer>
                 <StyledCardTimeline>
                   <StyledTimelineCardUserContainer>
                     {item.creator.image_url ?
@@ -149,7 +151,7 @@ const Timeline = () => {
                     <StyledTimelineButton onClick={() => console.log(item)}> Adicionar</StyledTimelineButton>
                   </Popover>
                 </StyledCardTimeline>
-              </ListAntd.Item>
+              </StyledTimelineContainer>
 
               /*key={item.title}
               actions={[
