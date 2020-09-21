@@ -25,7 +25,7 @@ import {
 
 const Busca = () => {
   const [book, setBook] = useState([]);
-  const [bookModal, setBookModal] = useState({})
+  const [bookModal, setBookModal] = useState({});
   const [visible, setVisible] = useState(false);
   const [searchBook, setSearchBook] = useState("javascript");
 
@@ -59,7 +59,7 @@ const Busca = () => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchBook}`)
       .then((response) => response.json())
       .then(({ items }) => {
-        // console.log(items)
+      
         setBook(items)
       });
 
@@ -81,7 +81,6 @@ const Busca = () => {
             <a >
               <div onClick={() => {
                 handleClick(book); 
-                console.log(bookModal)
               }}>
                 <StyledBuscaImg src={
                   "https://books.google.com/books/content?id=" +
@@ -111,7 +110,7 @@ const Busca = () => {
           </StyledBuscaCard>
           
         ))}
-        {/* <Modal
+      <Modal
           title="Modal 1000px width"
           centered
           visible={visible}
@@ -119,10 +118,11 @@ const Busca = () => {
           onCancel={() => setVisible(false)}
           width={1000}
         >
-          <p>{bookModal.volumeInfo.description}</p>
+          <p>{bookModal}teste </p>
           <p>some contents...</p>
           <p>some contents...</p>
-        </Modal> */}
+          
+        </Modal>
         
       { /*<StyledCardSearch
             key={index}
