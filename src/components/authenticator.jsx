@@ -41,7 +41,7 @@ const Authenticator = () => {
   };
 
   useEffect(() => {
-    if (authenticate === true) { history.push('/timeline') }
+    if (authenticate === true) { history.push('/prateleiras') }
   }, [authenticate, history])
 
   useEffect(() => {
