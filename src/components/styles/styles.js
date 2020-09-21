@@ -421,6 +421,9 @@ font-size: 1.2rem;
 width: 180px;
 text-align: right;
 cursor: pointer;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 `
 
 export const StyledPrateleiraCardButton = styled.div`

@@ -7,7 +7,7 @@ import Registration from './pages/1-registration';
 import Shelf from './pages/3-prateleiras';
 import Busca from './pages/4-busca';
 import Header from './header';
-import Profile from './pages/6-perfil'
+import Profile from './pages/6-perfil';
 import {
   requestValidate,
 } from '../redux/actions'
@@ -96,6 +96,11 @@ const Authenticator = () => {
         <Route path="/timeline/">
           <Header />
           <Timeline />
+        </Route>
+
+        <Route path="/profile/">
+          <Header />
+          <Profile />
         </Route>
       </Switch>
     </div>

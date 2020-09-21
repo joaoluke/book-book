@@ -6,7 +6,7 @@ import { logout } from '../../redux/actions'
 
 import { HeaderStyled, StyledHeaderContainer, HeaderStyledTitle, StyledHeaderText } from "../styles/styles";
 
-const HeaderBookBook = ({ doLogout, doBusca, doTimeline, doPrateleiras }) => {
+const HeaderBookBook = ({ doLogout, doBusca, doTimeline, doPrateleiras, doProfile }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   return (
@@ -15,16 +15,17 @@ const HeaderBookBook = ({ doLogout, doBusca, doTimeline, doPrateleiras }) => {
         BookBook
       </HeaderStyledTitle>
       <StyledHeaderContainer>
-        <StyledHeaderText onClick={() => history.push("/busca")} key="2">
-          Buscar livros
-       </StyledHeaderText>
         <StyledHeaderText onClick={() => history.push("/timeline")} key="3">
           Timeline
           </StyledHeaderText>
-
-
+        <StyledHeaderText onClick={() => history.push("/busca")} key="2">
+          Buscar livros
+       </StyledHeaderText>
         <StyledHeaderText onClick={() => history.push("/prateleiras")}>
           Sua prateleira
+        </StyledHeaderText>
+        <StyledHeaderText onClick={() => history.push("/profile")}>
+          Perfil
         </StyledHeaderText>
         <StyledHeaderText onClick={() => {
           dispatch(logout());

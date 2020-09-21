@@ -143,7 +143,7 @@ export default function Timeline ()  {
                 <StyledCardTimeline>
                   <StyledTimelineCardUserContainer>
                     {book.creator.image_url ?
-                      <StyledTimelineCardAvatar> {book.creator.image_url}</StyledTimelineCardAvatar> :
+                      <StyledTimelineCardAvatar src={book.creator.image_url}> </StyledTimelineCardAvatar> :
                       <StyledTimelineCardAvatar> {book.creator.name[0].toUpperCase()} </StyledTimelineCardAvatar>}
                     <StyledTimelineCardUser>{book.creator.name}</StyledTimelineCardUser>
                   </StyledTimelineCardUserContainer>
@@ -173,7 +173,7 @@ export default function Timeline ()  {
               <StyledCardTimeline>
                 <StyledTimelineCardUserContainer>
                   {book.creator.image_url ?
-                    <StyledTimelineCardAvatar> {book.creator.image_url}</StyledTimelineCardAvatar> :
+                    <StyledTimelineCardAvatar> </StyledTimelineCardAvatar> :
                     <StyledTimelineCardAvatar> {book.creator.name[0].toUpperCase()} </StyledTimelineCardAvatar>}
                   <StyledTimelineCardUser>{book.creator.name}</StyledTimelineCardUser>
                 </StyledTimelineCardUserContainer>
