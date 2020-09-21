@@ -9,7 +9,6 @@ import Busca from './pages/4-busca'
 import Header from './header'
 import {
   requestValidate,
-  logout,
 } from '../redux/actions'
 import 'antd/dist/antd.css';
 import logo from "../images/books-login.svg";
@@ -22,7 +21,10 @@ import {
 } from "./styles/styles"
 
 const Authenticator = () => {
+  const dispatch = useDispatch()
+  const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
   const [visible, setVisible] = useState(false);
+  const history = useHistory()
 
   const showModal = () => {
     setVisible(true);
@@ -38,29 +40,13 @@ const Authenticator = () => {
     setVisible(false);
   };
 
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
-
-  const doLogout = () => {
-
-  }
-
-  const doBusca = () => {
-    history.push('/busca')
-  }
-
-  const doTimeline = () => {
-    history.push('/timeline')
-  }
-
-  const doPrateleiras = () => {
-    history.push('/prateleiras')
-  }
+  useEffect(() => {
+    if (authenticate === true) { history.push('/timeline') }
+  }, [authenticate, history])
 
   useEffect(() => {
     dispatch(requestValidate())
-  }, [dispatch])
+  }, [authenticate, dispatch])
 
   if (authenticate === undefined) {
     return <div>Loading...</div>
@@ -95,7 +81,6 @@ const Authenticator = () => {
 
   return (
     <div>
-
       <Switch>
         <Route path="/prateleiras">
           <Header />
