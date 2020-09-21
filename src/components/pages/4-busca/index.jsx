@@ -123,46 +123,6 @@ const Busca = () => {
             </StyledBuscaCardTextContainer>
           </StyledBuscaCard>
         ))}
-      { /*<StyledCardSearch
-            key={index}
-            style={{ width: 250 }}
-            cover={
-              <img
-                alt={book.volumeInfo.title}
-                src={
-                  "https://books.google.com/books/content?id=" +
-                  book.id +
-                  "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api"
-                }
-              />
-            }
-            actions={[
-              <Button
-                type="text"
-                key="add"
-              // onClick={() =>
-              //   console.log({
-              //     title: book.volumeInfo.title,
-              //     autor: book.volumeInfo.authors,
-              //     image_url:
-              //       "https://books.google.com/books/content?id=" +
-              //       book.id +
-              //       "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api",
-              //     categories: "tecnologia",
-              //     google_book_id: book.id,
-              //   })
-              // }
-              >
-                Adicionar
-              </Button>,
-            ]}
-          >
-            <StyledCardSearch.Meta
-              title={book.volumeInfo.title}
-              description={book.volumeInfo.authors}
-            />
-          </StyledCardSearch> */}
-
     </StyledBodySearch>
   );
 };

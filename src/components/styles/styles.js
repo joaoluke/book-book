@@ -5,7 +5,7 @@ import {
   Button,
 } from "antd";
 import "antd/dist/antd.css";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 const { Header } = Layout;
 
 const { Search } = Input;

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "antd/dist/antd.css";
-import { Avatar, Space, Popover, notification } from "antd";
-import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
-import axios from 'axios'
+import { Popover, notification } from "antd";
+
+
 import {
   Div,
   ListAntd,
@@ -25,18 +25,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { requestBooks, postUserBooks } from '../../../redux/actions';
 
-const IconText = ({ icon, text }) => (
-  <Space>
-    {React.createElement(icon)}
-    {text}
-  </Space>
-);
-
-
 const Timeline = () => {
   const getUser = useSelector((state) => state.session.user.user)
   const getId = useSelector((state) => state.session.user.id);
-  const getToken = useSelector((state) => state.session.token)
   const books = useSelector((state) => {
     return state.timeline;
   })
@@ -68,17 +59,7 @@ const Timeline = () => {
   );
 
   const dispatch = useDispatch();
-  // console.log(getUser)
-  // console.log(getId)
-  // console.log(getToken)
-  const [listData, setData] = useState([]);
-  const url = "https://ka-users-api.herokuapp.com/book_reviews"
-  const token = window.localStorage.getItem("authToken")
-  const [searchBook, setSearchBook] = useState("javascript");
-  const [book, setBook] = useState([]);
-  const addPrateleira = () => {
-    console.log(books)
-  }
+
 
   const addBook = (book) => {
     console.log(book)
@@ -152,41 +133,6 @@ const Timeline = () => {
                   </Popover>
                 </StyledCardTimeline>
               </StyledTimelineContainer>
-
-              /*key={item.title}
-              actions={[
-          <IconText
-            icon={StarOutlined}
-            text="156"
-            key="list-vertical-star-o"
-          />,
-          <IconText
-            icon={LikeOutlined}
-            text="156"
-            key="list-vertical-like-o"
-          />,
-          <IconText
-            icon={MessageOutlined}
-            text="2"
-            key="list-vertical-message"
-          />,
-          console.log(item),
-        ]}
-              extra={
-          <img
-            width={272}
-            alt="logo"
-            src={item.image_url}
-          />
-        }
-            >
-              <ListAntd.Item.Meta
-          avatar={<Avatar src={item.creator.image_url} />}
-          title={<a href={item.href}>{item.title}</a>}
-          description={item.review ? item.review : "Este livro ainda não tem uma avaliação"}
-        />
-        {item.content}
-            </ListAntd.Item>*/
             )
           }}
         />
