@@ -110,63 +110,9 @@ color: #4951EC !important;
 `
 
 
-export const HeaderStyled = styled(Header)`
-  z-index: 3;
-  position: sticky;
-  top: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: #4951ec;
-  width: 100vw;
-  height: 8vh;
-  font-family: Poppins;
-  font-size: 1.5rem;
-  margin: 0px;
-  h1 {
-    padding-top: 2vh;
-    color: rgba(255, 255, 255, 0.85);
-    padding-left: 20%;
-  }
-`;
-
-export const HeaderStyledTitle = styled.div`
-width:200px;
-display: flex;
-align-items: center;
-color: #EEE;
-font-family: Poppins;
-font-weight: bold;
-font-size: 3rem;
-`
-
-
-export const StyledHeaderText = styled.div`
-:hover{
-  color: #88C;
-}
-padding:0px 20px;
-cursor: pointer ;
-`
-
-export const StyledHeaderContainer = styled.div`
- display: flex;
- flex-direction: row;
- justify-content: left;
- align-items: center;
-  color: white;
-  background-color: #4951ec;
-  position: relative;
-  font-family: Poppins;
-  font-size: 2.0rem;
-  right:100px;
-
-`
-
 export const StyledH1 = styled(Title)`
   color: #4951EC !important;
 `;
-
 
 export const StyledBodySearch = styled.div`
   display: flex;
@@ -188,8 +134,79 @@ export const StyledInputSearch = styled(Search)`
 export const StyledCardSearch = styled(Card)`
   margin: 60px auto;
 `;
+/* HEADER ================================== */
 
+export const StyledHeaderText = styled.div`
+:hover{
+  color: #88C;
+}
+padding:0px 20px;
+cursor: pointer ;
+`
 
+export const HeaderStyled = styled(Header)`
+  z-index: 3;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #4951ec;
+  width: 100vw;
+  height: 8vh;
+  font-family: Poppins;
+  font-size: 1.5rem;
+  margin: 0px;
+  h1 {
+    padding-top: 2vh;
+    color: rgba(255, 255, 255, 0.85);
+    padding-left: 20%;
+  }
+ 
+`;
+
+export const StyledHeaderContainer = styled.div`
+ display: flex;
+ flex-direction: row;
+ justify-content: left;
+ align-items: center;
+  color: white;
+  background-color: #4951ec;
+  position: relative;
+  font-family: Poppins;
+  font-size: 2.0rem;
+  right:100px;
+  @media(max-width: 600px) {
+   right: 0px;
+   width: 20px;
+  }
+`
+
+export const HeaderStyledTitle = styled.div`
+width:200px;
+display: flex;
+align-items: center;
+color: #EEE;
+font-family: Poppins;
+font-weight: bold;
+font-size: 3rem;
+`
+
+export const StyledHeaderContainerMedia = styled.div`
+visibility: hidden;
+@media(max-width: 600px) {
+   visibility: visible;
+   width: 20px;
+ }
+`
+
+export const StyledHeaderMediaFilter = styled.div`
+ display: flex;
+ flex-direction: row;
+ @media(max-width: 600px) {
+   visibility: hidden;
+ }
+`
 
 /*=TIMELINE=================================*/
 

@@ -43,6 +43,13 @@ header {
   border-left-color: #aaa  !important;
  }
 
+ .ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomLeft > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
+  border-top-color: transparent !important;
+  border-right-color: transparent  !important;
+  border-bottom-color: transparent  !important;
+  border-left-color: transparent  !important;
+ }
+
 .ant-popover-inner-content{
   background-color: #aaa;
  }
