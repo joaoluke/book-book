@@ -26,12 +26,17 @@ header {
 .Login {
   grid-area: login;
   margin: 50% 10% auto auto;
-}
+}*/
 
-.ant-popover-content {
- background-color: #aaa;
-}
+ .ant-popover-placement-left > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-leftTop > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-leftBottom > .ant-popover-content > .ant-popover-arrow {
 
+  border-top-color: #aaa !important;
+  border-right-color: #aaa  !important;
+  border-bottom-color: transparent  !important;
+  border-left-color: transparent  !important;
+ }
+
+<<<<<<< HEAD
 .ant-popover-arrow {
   border-top-color: #aaa;
   border-right-color: #aaa;
@@ -43,10 +48,22 @@ header {
   background-color: #4951EC;
 }
 
+=======
+ .ant-popover-placement-right > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-rightTop > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-rightBottom > .ant-popover-content > .ant-popover-arrow {
+  border-top-color: transparent !important;
+  border-right-color: transparent  !important;
+  border-bottom-color: #aaa  !important;
+  border-left-color: #aaa  !important;
+ }
+>>>>>>> develop
 
 .ant-popover-inner-content{
   background-color: #aaa;
  }
+
+ .ant-btn .ant-btn-primary .ant-btn-lg .ant-input-search-button {
+  background-color: #4951EC;
+}
 
 
 Registration {
@@ -54,3 +71,6 @@ Registration {
   position: absolute;
 }
 
+.ant-layout-header .ant-menu {
+  line-height: 370% !important; 
+}

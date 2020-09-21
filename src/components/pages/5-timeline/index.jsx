@@ -3,12 +3,10 @@ import 'antd/dist/antd.css';
 import { useSelector, useDispatch} from 'react-redux';
 import { Div } from '../../styles/styles';
 import { ListAntd } from '../../styles/styles';
-import { requestBooks } from '../../../redux/actions';
-import "antd/dist/antd.css";
-import "./style/index.css"
-import { Space } from "antd";
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
-import axios from "axios";
+import "./style/index.css";
+import { Avatar, Space, Popover, notification } from "antd";
+import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
+import axios from 'axios'
 import {
   StyledCardTimeline,
   StyledTimelineCardTopText,
@@ -20,30 +18,90 @@ import {
   StyledTimelineCardUser,
   StyledTimelineCardAvatar,
   StyledTimelineAuthor,
+  StyledPopover,
+  StyledPopoverContainer,
+  StyledTimelineText,
 } from "../../styles/styles";
+import { requestBooks, postUserBooks } from '../../../redux/actions';
+
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
     {text}
   </Space>
 );
-export default function useBookSearch ()  {
+export default function Timeline ()  {
   const [hasMore, setHasMore] = useState(false);
-  
+  const [currentBooks, setCurrentBooks] = useState([]);
   const [ pageNumber, setPageNumber] = useState(1)
 
-  const getUser = useSelector((state) => state.session.user.user);
+
+  const getUser = useSelector((state) => state.session.user.user)
+  const getId = useSelector((state) => state.session.user.id);
   const getImage = useSelector((state) => state.session.user.image_url);
+  const getToken = useSelector((state) => state.session.token)
   const books = useSelector((state) => {
     return state.timeline;
   })
-  const [currentBooks, setCurrentBooks] = useState([]);
-  const loading = books.length === 0;
+
+  const openNotificationWithIcon = type => {
+    if (type === "success") {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Livro adicionado à prateleira!',
+      });
+    }
+    else {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Erro! tente novamente.',
+      });
+    }
+  };
+
+
+  const content = (book) => (
+    <StyledPopoverContainer>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 1 })}>Quero Ler</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 2 })}>Lendo</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 3 })}>Já li</StyledPopover>
+    </StyledPopoverContainer>
+  );
 
   const dispatch = useDispatch();
+  // console.log(getUser)
+  // console.log(getId)
+  // console.log(getToken)
+  const [listData, setData] = useState([]);
+  const url = "https://ka-users-api.herokuapp.com/book_reviews"
+  const token = window.localStorage.getItem("authToken")
+  const [searchBook, setSearchBook] = useState("javascript");
+  const [book, setBook] = useState([]);
+  const loading = books.length === 0;
+  const addPrateleira = () => {
+    console.log(books)
+  }
 
-  const addShelf = () => {
-    console.log("addShelf")
+  const addBook = (book) => {
+    console.log(book)
+    const values = {
+      book: {
+        author: book.author,
+        categories: book.categories,
+        google_book_id: book.google_book_id,
+        grade: book.grade,
+        id: book.id,
+        image_url: book.image_url,
+        review: book.review,
+        shelf: book.shelf,
+        title: book.title,
+      }
+    }
+    console.log(values)
+    dispatch(postUserBooks(values))
+    openNotificationWithIcon('success')
   }
 
   const observer = useRef();
@@ -102,8 +160,9 @@ export default function useBookSearch ()  {
                 {book.categories ? <StyledTimelineCardSubtitle> Categoria: {book.categories} </StyledTimelineCardSubtitle> :
                   <StyledTimelineCardSubtitle> Categoria: Não informado </StyledTimelineCardSubtitle>}
 
-
-                  <StyledTimelineButton onClick={addShelf}> Adicionar à Prateleira</StyledTimelineButton>
+                  <Popover placement="right" content={content(book)} trigger="click">
+                    <StyledTimelineButton onClick={() => console.log(book)}> Adicionar</StyledTimelineButton>
+                  </Popover>
                 </StyledCardTimeline>
               </ListAntd.Item>
               </div>
@@ -131,16 +190,16 @@ export default function useBookSearch ()  {
               {book.categories ? <StyledTimelineCardSubtitle> Categoria: {book.categories} </StyledTimelineCardSubtitle> :
                 <StyledTimelineCardSubtitle> Categoria: Não informado </StyledTimelineCardSubtitle>}
 
-
-                <StyledTimelineButton onClick={addShelf}> Adicionar à Prateleira</StyledTimelineButton>
+                  <Popover placement="right" content={content(book)} trigger="click">
+                    <StyledTimelineButton onClick={() => console.log(book)}> Adicionar</StyledTimelineButton>
+                  </Popover>
               </StyledCardTimeline>
               </ListAntd.Item>
               )
           }
         })}
-
+          
       </div>
-      <h1>{loading && 'Loading...'}</h1>
     </Div>
   );
 };

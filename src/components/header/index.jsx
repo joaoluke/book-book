@@ -1,11 +1,39 @@
 import React from "react";
-import { Header } from "../styles/styles";
+import "antd/dist/antd.css";
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { logout } from '../../redux/actions'
 
-const HeaderBookBook = () => {
+import { HeaderStyled, StyledHeaderContainer, HeaderStyledTitle, StyledHeaderText } from "../styles/styles";
+
+const HeaderBookBook = ({ doLogout, doBusca, doTimeline, doPrateleiras }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   return (
-    <Header>
-      <h1>BookBook</h1>
-    </Header>
+    <HeaderStyled>
+      <HeaderStyledTitle>
+        BookBook
+      </HeaderStyledTitle>
+      <StyledHeaderContainer>
+        <StyledHeaderText onClick={() => history.push("/busca")} key="2">
+          Buscar livros
+       </StyledHeaderText>
+        <StyledHeaderText onClick={() => history.push("/timeline")} key="3">
+          Timeline
+          </StyledHeaderText>
+
+
+        <StyledHeaderText onClick={() => history.push("/prateleiras")}>
+          Sua prateleira
+        </StyledHeaderText>
+        <StyledHeaderText onClick={() => {
+          dispatch(logout());
+          history.push("/");
+        }}>
+          Sair
+          </StyledHeaderText>
+      </StyledHeaderContainer>
+    </HeaderStyled>
   );
 };
 

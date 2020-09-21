@@ -1,59 +1,88 @@
 import React, { useState, useEffect } from "react";
 import "../../../App.css"
-import { Input, Typography, Button, Popover, Modal } from "antd";
+import {
+  Popover,
+  notification,
+  Modal
+} from "antd";
 import {
   StyledH1,
   StyledBodySearch,
   StyledInputSearch,
-  StyledCardSearch,
   StyledBuscaCard,
   StyledBuscaImg,
   StyledBuscaCardTextContainer,
   StyledBuscaCardTitle,
   StyledBuscaCardAuthor,
-  StyledBuscaCardYear,
   StyledBuscaCardDescription,
   StyledBuscaCardButton,
-  StyledTimelineCardSubtitle,
   StyledBuscaCardTopTextContainer,
   StyledBuscaCardButtonContainer,
   StyledPopover,
   StyledPopoverContainer,
 } from '../../styles/styles.js'
+import { useDispatch } from 'react-redux';
+import { postUserBooks } from '../../../redux/actions';
 
 
 
 const Busca = () => {
+  const dispatch = useDispatch()
   const [book, setBook] = useState([]);
-  const [bookModal, setBookModal] = useState({});
+  const [bookModal, setBookModal] = useState(null);
   const [visible, setVisible] = useState(false);
   const [searchBook, setSearchBook] = useState("javascript");
 
+  const openNotificationWithIcon = type => {
+    if (type === "success") {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Livro adicionado à prateleira!',
+      });
+    }
+    else {
+      notification[type]({
+        message: 'BookBook diz:',
+        description:
+          'Erro! tente novamente.',
+      });
+    }
+  };
 
-  const queroLer = () => {
-    // console.log("quero ler")
+
+  const addBook = (book) => {
+    console.log(book)
+    const values = {
+      book: {
+        author: book.volumeInfo.authors.join(""),
+        categories: (book.volumeInfo.categories ? book.volumeInfo.categories.join("") : ""),
+        google_book_id: book.id,
+        grade: book.volumeInfo.averageRating,
+        id: "?",
+        image_url: book.volumeInfo.imageLinks.thumbnail,
+        review: "",
+        shelf: book.shelf,
+        title: book.volumeInfo.title,
+      }
+    }
+    dispatch(postUserBooks(values))
+    openNotificationWithIcon('success')
   }
 
-  const lendo = () => {
-    // console.log("lendo")
-  }
-
-  const jali = () => {
-    // console.log("ja li")
-  }
-
-  const content = (
+  const content = (book) => (
     <StyledPopoverContainer>
-      <StyledPopover onClick={queroLer} >Quero Ler</StyledPopover>
-      <StyledPopover onClick={lendo}>Quero Ler</StyledPopover>
-      <StyledPopover onClick={jali}>Quero Ler</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 1 })}>Quero Ler</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 2 })}>Lendo</StyledPopover>
+      <StyledPopover onClick={() => addBook({ ...book, shelf: 3 })}>Já li</StyledPopover>
     </StyledPopoverContainer>
   );
 
   const handleClick = (book) => {
+    console.log("Chamou", book);
     setBookModal(book);
     setVisible(true);
-  }
+  };
 
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchBook}`)
@@ -91,15 +120,15 @@ const Busca = () => {
             </a>
             <StyledBuscaCardTextContainer>
               <StyledBuscaCardTopTextContainer>
-                <a onClick={() => setVisible(true)}>
-                  <div>
-                    <StyledBuscaCardTitle>{book.volumeInfo.title}</StyledBuscaCardTitle>
-                    <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor>
-                  </div>
-                </a>
+                <div>
+                  <StyledBuscaCardTitle>{book.volumeInfo.title}</StyledBuscaCardTitle>
+                  {book.volumeInfo.authors ?
+                    <StyledBuscaCardAuthor>{book.volumeInfo.authors.join("")}</StyledBuscaCardAuthor> :
+                    <StyledBuscaCardAuthor>Autor não informado</StyledBuscaCardAuthor>}
+                </div>
                 <StyledBuscaCardButtonContainer>
-                  <Popover placement="right" content={content} trigger="click">
-                    <StyledBuscaCardButton>Adicionar</StyledBuscaCardButton>
+                  <Popover placement="right" content={content(book)} trigger="click">
+                    <StyledBuscaCardButton >Adicionar</StyledBuscaCardButton>
                   </Popover>
 
                 </StyledBuscaCardButtonContainer>
@@ -110,19 +139,21 @@ const Busca = () => {
           </StyledBuscaCard>
           
         ))}
-      <Modal
-          title="Modal 1000px width"
-          centered
-          visible={visible}
-          onOk={() => setVisible(false)}
-          onCancel={() => setVisible(false)}
-          width={1000}
-        >
-          <p>{bookModal}teste </p>
-          <p>some contents...</p>
-          <p>some contents...</p>
-          
-        </Modal>
+        {bookModal && (
+          <Modal
+            centered
+            visible={visible}
+            onOk={() => setVisible(false)}
+            onCancel={() => setVisible(false)}
+            width={1000}
+          >
+            {bookModal ? <p>{bookModal.volumeInfo.title}</p> : <p>Livro sem título</p>}
+            {bookModal ? <p>{bookModal.volumeInfo.subtitle}</p> : <p>Livro sem sub-título</p>}
+            {bookModal ? <p>{bookModal.volumeInfo.description}</p> : <p>Livro sem descrição</p>}
+            {bookModal ? <img src={bookModal.volumeInfo.imageLinks.thumbnail}/> : <img src={bookModal.volumeInfo.imageLinks.smallThumbnail}/>}
+            {bookModal ? <p>{bookModal.volumeInfo.authors[0]}</p> : <p>Autor desconhecido</p>}
+          </Modal>
+        )}
         
       { /*<StyledCardSearch
             key={index}

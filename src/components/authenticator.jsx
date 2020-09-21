@@ -10,11 +10,10 @@ import Header from './header';
 import Profile from './pages/6-perfil'
 import {
   requestValidate,
-  logout,
 } from '../redux/actions'
 import 'antd/dist/antd.css';
 import logo from "../images/books-login.svg";
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 import {
   LoginHeader,
   LoginSlogan,
@@ -23,7 +22,10 @@ import {
 } from "./styles/styles"
 
 const Authenticator = () => {
+  const dispatch = useDispatch()
+  const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
   const [visible, setVisible] = useState(false);
+  const history = useHistory()
 
   const showModal = () => {
     setVisible(true);
@@ -39,34 +41,13 @@ const Authenticator = () => {
     setVisible(false);
   };
 
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const authenticate = useSelector((state) => state.authenticate.isAuthenticated)
-
-  const doLogout = () => {
-    dispatch(logout())
-    history.push('/')
-  }
-
-  const doBusca = () => {
-    history.push('/search')
-  }
-
-  const doShelf = () => {
-    history.push('/shelf')
-  }
-
-  const doTimeline = () => {
-    history.push('/timeline')
-  }
-
-  const doPerfil = () => {
-    history.push('/profile')
-  }
+  useEffect(() => {
+    if (authenticate === true) { history.push('/timeline') }
+  }, [authenticate, history])
 
   useEffect(() => {
     dispatch(requestValidate())
-  }, [dispatch])
+  }, [authenticate, dispatch])
 
   if (authenticate === undefined) {
     return <div>Loading...</div>
@@ -101,27 +82,15 @@ const Authenticator = () => {
 
   return (
     <div>
-      Autenticado
-      <button onClick={doLogout}>LOGOUT</button>
-      <button onClick={doBusca}>BUSCA</button>
-      <button onClick={doTimeline}>TIMELINE</button>
-      <button onClick={doShelf}>PRATELEIRAS</button>
-      <button onClick={doPerfil}>PERFIL</button>
       <Switch>
-        <Route path="/shelf">
+        <Route path="/prateleiras">
           <Header />
           <Shelf />
         </Route>
 
-        <Route path="/search">
+        <Route path="/busca">
           <Header />
           <Busca />
-          <Shelf></Shelf>
-        </Route>
-
-        <Route path="/profile">
-          <Header />
-          <Profile></Profile>
         </Route>
 
         <Route path="/timeline/">
