@@ -12,6 +12,8 @@ export const SET_ID_BOOK = 'SET_ID_BOOK' // id livro pra troca prateleira
 export const ADD_BOOKS = 'ADD_BOOKS'
 
 
+//======= session Actions ========/
+
 export const login = (token, user) => ({
   type: LOGIN,
   token,
@@ -59,6 +61,9 @@ export const setAuthenticationFalse = () => ({
 export const setAuthenticationTrue = () => ({
   type: TRUE
 });
+
+//==============================
+
 
 export const setList = (list) => ({
   type: SETLIST,
