@@ -57,3 +57,6 @@ Registration {
   position: absolute;
 }
 
+.ant-layout-header .ant-menu {
+  line-height: 370% !important; 
+}

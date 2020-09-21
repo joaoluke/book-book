@@ -14,6 +14,7 @@ import {
   StyledPrateleiraReview,
   StyledPrateleiraReviewContainer,
   StyledPrateleiraGrade,
+  StyledPrateleiraText,
 } from '../../styles/styles.js'
 import { requestBookId } from '../../../redux/actions'
 import Review from "../review"
@@ -224,7 +225,8 @@ const Prateleiras = () => {
 
   //-----------------------------------------------------------------------
   return (
-    <div> PRATELEIRAS
+    <div>
+      <StyledPrateleiraText>Suas Prateleiras</StyledPrateleiraText>
       <hr /> <hr />
       <h1> Quero Ler</h1>
       <StyledPrateleiraContainer>

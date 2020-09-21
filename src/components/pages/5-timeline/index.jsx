@@ -18,6 +18,7 @@ import {
   StyledTimelineAuthor,
   StyledPopover,
   StyledPopoverContainer,
+  StyledTimelineText,
 } from "../../styles/styles";
 import { useDispatch, useSelector } from 'react-redux';
 import { requestBooks, postUserBooks } from '../../../redux/actions';
@@ -104,8 +105,8 @@ const Timeline = () => {
 
   return (
     < Div >
-      <h1>Olá {getUser}</h1>
-      <p>Timeline</p>
+      <h1>Olá {getUser}!</h1>
+      <StyledTimelineText>Timeline</StyledTimelineText>
       <div>
         <ListAntd
           itemLayout="vertical"
@@ -118,11 +119,6 @@ const Timeline = () => {
             pageSize: 5,
           }}
           dataSource={books}
-          footer={
-            <div>
-              <b>ant design</b> footer part
-            </div>
-          }
           renderItem={(item) => {
             //console.log(item)
             return (
