@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, notification, Popover } from 'antd';
+import { notification, Popover } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import { requestUserBooks } from '../../../redux/actions'
 import {
@@ -17,9 +17,9 @@ import {
   StyledPrateleiraText,
 } from '../../styles/styles.js'
 import { requestBookId } from '../../../redux/actions'
-import Review from "../review"
+
 import axios from 'axios'
-const { Meta } = Card;
+
 
 const Prateleiras = () => {
   const [show, setShow] = useState("")
@@ -131,14 +131,7 @@ const Prateleiras = () => {
 
   const changeShelf = (book, shelf) => {
     console.log(book)
-    axios.put(`https://ka-users-api.herokuapp.com/users/${getId}/books/${book.id}`,
-      {
-        "book": {
-          "shelf": shelf
-        }
-      },
-      { headers: { Authorization: getToken } }
-    )
+    dispatch(requestBookId(book.id, userId, shelf))
     changeShelfNotification("success")
   }
 
@@ -204,7 +197,6 @@ const Prateleiras = () => {
   // =================================
   const userId = useSelector((state) => state.session.user.id)
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.session.token)
   const bookId = useSelector((state) => state.shelf)
 
 

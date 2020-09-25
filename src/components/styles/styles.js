@@ -5,7 +5,7 @@ import {
   Button,
 } from "antd";
 import "antd/dist/antd.css";
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 const { Header } = Layout;
 
 const { Search } = Input;
@@ -15,7 +15,41 @@ export const ListAntd = styled(List)`
   /* background-color: white; */
   align-self: center;
   align-items: flex-end;
+  @media(max-width: 500px) {
+   height: 100px;
+  }
+  
 `;
+
+export const StyledTimelineTitle = styled(Title)`
+ @media(max-width: 500px) {
+  position: relative;
+  left:-100px;
+  font-family: Poppins;
+  font-size:20px;
+  font-weight: bold;
+ }
+`
+
+
+export const StyledTimelineContainer = styled.div`
+  /* background-color: white; */
+  align-self: center;
+  align-items: flex-end;
+  position: relative;
+  right:200px;
+  margin:100px 50px;
+  @media(max-width: 500px) {
+  
+  right:90px;
+  top:-50px;
+  margin:0px 0px;
+  width: 85vw;
+  height:400px;
+}
+  `
+
+
 
 export const LoginHeader = styled.header`
   position: absolute;
@@ -97,18 +131,71 @@ export const Div = styled.div`
     margin-right: 80%;
     color: #4951ec;
   }
+  @media(max-width: 500px) {
+  margin: 10px;
+   width: 100vw;
+   min-width: 400px;
+   position: flex;
+   justify-content: center;
+  
+  h1 {
+    font-weight: 600;
+    font-family: Poppins;
+    font-size: 3rem;
+    margin-right: 0%;
+    color: rgba(11, 7, 84, 0.85);
+  }
+}
 `;
 
 export const StyledTimelineText = styled(Title)`
 position: relative;
-left:320px;
+left:130px;
+top:30px;
 color: #4951EC !important;
+@media(max-width: 500px) {
+left:-30px}
 `
 
 export const StyledPrateleiraText = styled(Title)`
 color: #4951EC !important;
 `
 
+
+export const StyledH1 = styled(Title)`
+  color: #4951EC !important;
+`;
+
+export const StyledBodySearch = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5vh;
+  margin-bottom: 15vh;
+
+  h1 {
+    color: #0b0754;
+  }
+`;
+
+export const StyledInputSearch = styled(Search)`
+  margin-top: 30px;
+  width: 500px;
+`;
+
+export const StyledCardSearch = styled(Card)`
+  margin: 60px auto;
+`;
+/* HEADER ================================== */
+
+export const StyledHeaderText = styled.div`
+:hover{
+  color: #88C;
+}
+padding:0px 1vw;
+cursor: pointer ;
+
+`
 
 export const HeaderStyled = styled(Header)`
   z-index: 3;
@@ -128,26 +215,11 @@ export const HeaderStyled = styled(Header)`
     color: rgba(255, 255, 255, 0.85);
     padding-left: 20%;
   }
-`;
-
-export const HeaderStyledTitle = styled.div`
-width:200px;
-display: flex;
-align-items: center;
-color: #EEE;
-font-family: Poppins;
-font-weight: bold;
-font-size: 3rem;
-`
-
-
-export const StyledHeaderText = styled.div`
-:hover{
-  color: #88C;
-}
-padding:0px 20px;
-cursor: pointer ;
-`
+  @media(max-width: 500px) {
+   padding: 0px 0px;
+   width: 100vw;
+   justify-content: center;
+  }`
 
 export const StyledHeaderContainer = styled.div`
  display: flex;
@@ -160,23 +232,23 @@ export const StyledHeaderContainer = styled.div`
   font-family: Poppins;
   font-size: 2.0rem;
   right:100px;
-
+  @media(max-width: 500px) {
+   right: 0px;
+   width: 20px;
+  }
 `
 
-export const StyledH1 = styled(Title)`
-  color: #4951EC !important;
-`;
-
-
-export const StyledBodySearch = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 5vh;
-  margin-bottom: 15vh;
-
-  h1 {
-    color: #0b0754;
+export const HeaderStyledTitle = styled.div`
+width:200px;
+display: flex;
+align-items: center;
+color: #EEE;
+font-family: Poppins;
+font-weight: bold;
+font-size: 3rem;
+@media(max-width: 500px) {
+  position: relative;
+  right:40px;
   }
 `;
 
@@ -190,7 +262,21 @@ export const StyledCardSearch = styled(Card)`
   margin: 60px auto;
 `;
 
+export const StyledHeaderContainerMedia = styled.div`
+visibility: hidden;
+@media(max-width: 500px) {
+   visibility: visible;
+   width: 0px;
+ }
+`
 
+export const StyledHeaderMediaFilter = styled.div`
+ display: flex;
+ flex-direction: row;
+ @media(max-width: 500px) {
+   visibility: hidden;
+ }
+`
 
 /*=TIMELINE=================================*/
 
@@ -203,6 +289,10 @@ left: 50px;
 margin: 0px;
 padding: 5px;
 border-radius: 10px;
+@media(max-width: 500px) {
+  transform: scale(0.55);
+  left:-50px;
+  }
 `
 export const StyledTimelineCardUserContainer = styled.div`
 display: flex;

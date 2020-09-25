@@ -21,6 +21,8 @@ import {
   StyledPopover,
   StyledPopoverContainer,
   StyledTimelineText,
+  StyledTimelineContainer,
+  StyledTimelineTitle,
 } from "../../styles/styles";
 import { requestBooks, postUserBooks } from '../../../redux/actions';
 
