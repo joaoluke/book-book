@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../../../App.css"
 import {
   Popover,
-  notification
+  notification,
+  Modal
 } from "antd";
 import {
   StyledH1,
@@ -28,7 +29,9 @@ import { postUserBooks } from '../../../redux/actions';
 const Busca = () => {
   const dispatch = useDispatch()
   const [book, setBook] = useState([]);
-  const [searchBook, setSearchBook] = useState("");
+  const [bookModal, setBookModal] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [searchBook, setSearchBook] = useState("javascript");
 
   const openNotificationWithIcon = type => {
     if (type === "success") {
@@ -75,11 +78,17 @@ const Busca = () => {
     </StyledPopoverContainer>
   );
 
+  const handleClick = (book) => {
+    console.log("Chamou", book);
+    setBookModal(book);
+    setVisible(true);
+  };
+
   useEffect(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchBook}`)
       .then((response) => response.json())
       .then(({ items }) => {
-        console.log(items)
+      
         setBook(items)
       });
 
@@ -96,14 +105,19 @@ const Busca = () => {
       />
       {book &&
         book.map((book, index) => (
+          
           <StyledBuscaCard key={index}>
-            <div>
-              <StyledBuscaImg src={
-                "https://books.google.com/books/content?id=" +
-                book.id +
-                "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api"
-              } />
-            </div>
+            <a >
+              <div onClick={() => {
+                handleClick(book); 
+              }}>
+                <StyledBuscaImg src={
+                  "https://books.google.com/books/content?id=" +
+                  book.id +
+                  "&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api"
+                } />
+              </div>
+            </a>
             <StyledBuscaCardTextContainer>
               <StyledBuscaCardTopTextContainer>
                 <div>
@@ -119,10 +133,28 @@ const Busca = () => {
 
                 </StyledBuscaCardButtonContainer>
               </StyledBuscaCardTopTextContainer>
-              <StyledBuscaCardDescription>Descrição:{book.searchInfo.textSnippet}</StyledBuscaCardDescription>
+              <StyledBuscaCardDescription>Descrição: {book.volumeInfo.description}</StyledBuscaCardDescription>
             </StyledBuscaCardTextContainer>
+            
           </StyledBuscaCard>
+          
         ))}
+        {bookModal && (
+          <Modal
+            centered
+            visible={visible}
+            onOk={() => setVisible(false)}
+            onCancel={() => setVisible(false)}
+            width={1000}
+          >
+            {bookModal ? <p>{bookModal.volumeInfo.title}</p> : <p>Livro sem título</p>}
+            {bookModal ? <p>{bookModal.volumeInfo.subtitle}</p> : <p>Livro sem sub-título</p>}
+            {bookModal ? <p>{bookModal.volumeInfo.description}</p> : <p>Livro sem descrição</p>}
+            {bookModal ? <img src={bookModal.volumeInfo.imageLinks.thumbnail}/> : <img src={bookModal.volumeInfo.imageLinks.smallThumbnail}/>}
+            {bookModal ? <p>{bookModal.volumeInfo.authors[0]}</p> : <p>Autor desconhecido</p>}
+          </Modal>
+        )}
+
     </StyledBodySearch>
   );
 };

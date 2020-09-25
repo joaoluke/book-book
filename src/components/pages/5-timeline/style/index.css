@@ -1,0 +1,11 @@
+.user-photo {
+    margin: auto auto auto -4%
+}
+
+.hello {
+    margin: -16% auto 4% 12% !important;
+    font-weight: 600;
+    font-family: Poppins;
+    font-size: 2rem;
+    color: rgba(11,7,84,0.85);
+}

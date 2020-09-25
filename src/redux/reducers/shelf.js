@@ -1,8 +1,6 @@
-
-
 //troca de prateleira
 //Grava o id do livro clicado na prateleira
-import { SET_ID_BOOK } from '../actions'
+import { SET_ID_BOOK } from '../actions';
 
 const defaultState = {
   bookId: 0

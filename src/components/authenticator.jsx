@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react"
-import { Switch, Route, useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import Timeline from './pages/5-timeline'
-import WindowInitial from './pages/2-login'
-import Registration from './pages/1-registration'
-import Prateleiras from './pages/3-prateleiras'
-import Busca from './pages/4-busca'
-import Header from './header'
+import React, { useEffect, useState } from "react";
+import { Switch, Route, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import Timeline from './pages/5-timeline';
+import WindowInitial from './pages/2-login';
+import Registration from './pages/1-registration';
+import Shelf from './pages/3-prateleiras';
+import Busca from './pages/4-busca';
+import Header from './header';
+import Profile from './pages/6-perfil';
 import {
   requestValidate,
 } from '../redux/actions'
@@ -84,7 +85,7 @@ const Authenticator = () => {
       <Switch>
         <Route path="/prateleiras">
           <Header />
-          <Prateleiras />
+          <Shelf />
         </Route>
 
         <Route path="/busca">
@@ -95,10 +96,12 @@ const Authenticator = () => {
         <Route path="/timeline/">
           <Header />
           <Timeline />
-
-
         </Route>
 
+        <Route path="/profile/">
+          <Header />
+          <Profile />
+        </Route>
       </Switch>
     </div>
   )

@@ -250,7 +250,17 @@ font-size: 3rem;
   position: relative;
   right:40px;
   }
-`
+`;
+
+export const StyledInputSearch = styled(Search)`
+  margin-top: 30px;
+  width: 500px;
+  background-color: black;
+`;
+
+export const StyledCardSearch = styled(Card)`
+  margin: 60px auto;
+`;
 
 export const StyledHeaderContainerMedia = styled.div`
 visibility: hidden;
@@ -389,14 +399,14 @@ export const StyledBuscaCardTextContainer = styled.div`
 `
 
 export const StyledBuscaCardTopTextContainer = styled.div`
-display: flex;
-justify-content: space-between;
-margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
 `
 
 
 export const StyledBuscaCardTitle = styled.h2`
-font-family: Poppins;
+  font-family: Poppins;
   font-size: 2rem;
   color: #888;
   width: 400px;
@@ -441,12 +451,12 @@ font-size: 1.5rem;
 `
 
 export const StyledPopoverContainer = styled.div`
-/*background-color: #aaa;
-color: white;*/
+  /*background-color: #aaa;
+  color: white;*/
 `
 
 export const StyledPopover = styled.p`
-cursor: pointer;
+  cursor: pointer;
 `
 /*Prateleiras===================*/
 
@@ -501,6 +511,9 @@ font-size: 1.2rem;
 width: 180px;
 text-align: right;
 cursor: pointer;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 `
 
 export const StyledPrateleiraCardButton = styled.div`
@@ -520,4 +533,9 @@ cursor: pointer;
 export const StyledPrateleiraReviewContainer = styled.div`
 display: flex;
 justify-content: space-between;
+`
+/*PERFIL=================================*/
+
+export const StyledProfileH4 = styled.h4`
+  margin: -2% auto 4% 12% !important;
 `

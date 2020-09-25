@@ -16,7 +16,9 @@ import {
   StyledPopoverContainer,
 } from "../styles/styles";
 
-const HeaderBookBook = () => {
+import { HeaderStyled, StyledHeaderContainer, HeaderStyledTitle, StyledHeaderText } from "../styles/styles";
+
+const HeaderBookBook = ({ doLogout, doBusca, doTimeline, doPrateleiras, doProfile }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -38,26 +40,23 @@ const HeaderBookBook = () => {
         BookBook
       </HeaderStyledTitle>
       <StyledHeaderContainer>
-        <StyledHeaderContainerMedia>
-          <Popover placement="bottom" content={content()} trigger="click">
-            <RiFileListFill />
-          </Popover>
-        </StyledHeaderContainerMedia>
-        <StyledHeaderMediaFilter>
-          <StyledHeaderText onClick={() => history.push("/busca")} key="2">
-            Buscar livros
-       </StyledHeaderText>
-          <StyledHeaderText onClick={() => history.push("/timeline")} key="3">
-            Timeline
+        <StyledHeaderText onClick={() => history.push("/timeline")} key="3">
+          Timeline
           </StyledHeaderText>
-          <StyledHeaderText onClick={() => history.push("/prateleiras")}>
-            Sua prateleira
+        <StyledHeaderText onClick={() => history.push("/busca")} key="2">
+          Buscar livros
+       </StyledHeaderText>
+        <StyledHeaderText onClick={() => history.push("/prateleiras")}>
+          Sua prateleira
         </StyledHeaderText>
-          <StyledHeaderText onClick={() => {
-            dispatch(logout());
-            history.push("/");
-          }}>
-            Sair
+        <StyledHeaderText onClick={() => history.push("/profile")}>
+          Perfil
+        </StyledHeaderText>
+        <StyledHeaderText onClick={() => {
+          dispatch(logout());
+          history.push("/");
+        }}>
+          Sair
           </StyledHeaderText>
         </StyledHeaderMediaFilter>
       </StyledHeaderContainer>

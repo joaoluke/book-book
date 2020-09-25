@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
-import "antd/dist/antd.css";
-import { Popover, notification } from "antd";
-
-
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import 'antd/dist/antd.css';
+import { useSelector, useDispatch} from 'react-redux';
+import { Div } from '../../styles/styles';
+import { ListAntd } from '../../styles/styles';
+import "./style/index.css";
+import { Avatar, Space, Popover, notification } from "antd";
+import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
+import axios from 'axios'
 import {
-  Div,
-  ListAntd,
   StyledCardTimeline,
   StyledTimelineCardTopText,
   StyledTimelineImg,
@@ -22,12 +24,24 @@ import {
   StyledTimelineContainer,
   StyledTimelineTitle,
 } from "../../styles/styles";
-import { useDispatch, useSelector } from 'react-redux';
 import { requestBooks, postUserBooks } from '../../../redux/actions';
 
-const Timeline = () => {
+const IconText = ({ icon, text }) => (
+  <Space>
+    {React.createElement(icon)}
+    {text}
+  </Space>
+);
+export default function Timeline ()  {
+  const [hasMore, setHasMore] = useState(false);
+  const [currentBooks, setCurrentBooks] = useState([]);
+  const [ pageNumber, setPageNumber] = useState(1)
+
+
   const getUser = useSelector((state) => state.session.user.user)
   const getId = useSelector((state) => state.session.user.id);
+  const getImage = useSelector((state) => state.session.user.image_url);
+  const getToken = useSelector((state) => state.session.token)
   const books = useSelector((state) => {
     return state.timeline;
   })
@@ -59,7 +73,18 @@ const Timeline = () => {
   );
 
   const dispatch = useDispatch();
-
+  // console.log(getUser)
+  // console.log(getId)
+  // console.log(getToken)
+  const [listData, setData] = useState([]);
+  const url = "https://ka-users-api.herokuapp.com/book_reviews"
+  const token = window.localStorage.getItem("authToken")
+  const [searchBook, setSearchBook] = useState("javascript");
+  const [book, setBook] = useState([]);
+  const loading = books.length === 0;
+  const addPrateleira = () => {
+    console.log(books)
+  }
 
   const addBook = (book) => {
     console.log(book)
@@ -81,64 +106,102 @@ const Timeline = () => {
     openNotificationWithIcon('success')
   }
 
+  const observer = useRef();
+  const lastBookRefElement = useCallback(node => {
+    console.log(node)
+    if (loading) return
+    if (observer.current) observer.current.disconnect()
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPageNumber(prevPage => prevPage + 1)
+      }
+    })
+    if (node) observer.current.observe(node)
+  }, [loading, hasMore]);
+  console.log(pageNumber)
   useEffect(() => {
-    dispatch(requestBooks(getId));
+    dispatch(requestBooks());
+  }, [dispatch])
 
-  }, [dispatch, getId])
+  useEffect(()=>{
+    if (loading) return
+    let beginning = 0;
+    let end = currentBooks.length + 6;
+    setCurrentBooks([...books].slice(beginning,end));
+    setHasMore(books.length !== currentBooks.length)
+  }, [pageNumber, loading])
+
 
   return (
     < Div >
-      <StyledTimelineTitle>Olá {getUser}!</StyledTimelineTitle>
-      <StyledTimelineText>Timeline</StyledTimelineText>
+      <img className="user-photo" src={getImage} width="100"/> 
+      <h3 className="hello">Olá {getUser}, o que vai ler hoje?</h3>
       <div>
-        <ListAntd
-          itemLayout="vertical"
-          size="large"
-          pagination={{
-            onChange: (page) => {
-              // console.log(page);
-              // console.log(listData)
-            },
-            pageSize: 5,
-          }}
-          dataSource={books}
-          renderItem={(item) => {
-            //console.log(item)
+        {currentBooks.map((book, index) => {
+          if (currentBooks.length === index + 1) {
             return (
-              <StyledTimelineContainer>
+              <div ref={lastBookRefElement}>
+              <ListAntd.Item >
                 <StyledCardTimeline>
                   <StyledTimelineCardUserContainer>
-                    {item.creator.image_url ?
-                      <StyledTimelineCardAvatar> {item.creator.image_url}</StyledTimelineCardAvatar> : (
-                        item.creator.user ?
-                          <StyledTimelineCardAvatar> {item.creator.user[0].toUpperCase()} </StyledTimelineCardAvatar> :
-                          <StyledTimelineCardAvatar>U</StyledTimelineCardAvatar>)}
-                    <StyledTimelineCardUser>{item.creator.user}</StyledTimelineCardUser>
+                    {book.creator.image_url ?
+                      <StyledTimelineCardAvatar src={book.creator.image_url}> </StyledTimelineCardAvatar> :
+                      <StyledTimelineCardAvatar> {book.creator.name[0].toUpperCase()} </StyledTimelineCardAvatar>}
+                    <StyledTimelineCardUser>{book.creator.name}</StyledTimelineCardUser>
                   </StyledTimelineCardUserContainer>
                   <StyledTimelineCardTopText>
-                    <StyledTimelineAuthor>Este livro foi escrito por: {item.author}</StyledTimelineAuthor>
-                    {item.grade ? <div>Avaliação: {item.grade}/10</div> : <div>Não Avaliado</div>}
+                    <StyledTimelineAuthor>Este livro foi escrito por: {book.author}</StyledTimelineAuthor>
+                    {book.grade ? <div>Avaliação: {book.grade}/10</div> : <div>Não Avaliado</div>}
                   </StyledTimelineCardTopText>
-                  <StyledTimelineImg src={item.image_url} />
+                  <StyledTimelineImg src={book.image_url} />
                   <StyledTimelineCardTitle>
                     <h2>
-                      {item.title}
+                      {book.title}
                     </h2>
                   </StyledTimelineCardTitle>
-                  {item.categories ? <StyledTimelineCardSubtitle> Categoria: {item.categories} </StyledTimelineCardSubtitle> :
-                    <StyledTimelineCardSubtitle> Categoria: Não informado </StyledTimelineCardSubtitle>}
+                {book.categories ? <StyledTimelineCardSubtitle> Categoria: {book.categories} </StyledTimelineCardSubtitle> :
+                  <StyledTimelineCardSubtitle> Categoria: Não informado </StyledTimelineCardSubtitle>}
 
-                  <Popover placement="right" content={content(item)} trigger="click">
-                    <StyledTimelineButton onClick={() => console.log(item)}> Adicionar</StyledTimelineButton>
+                  <Popover placement="right" content={content(book)} trigger="click">
+                    <StyledTimelineButton onClick={() => console.log(book)}> Adicionar</StyledTimelineButton>
                   </Popover>
                 </StyledCardTimeline>
-              </StyledTimelineContainer>
-            )
-          }}
-        />
+              </ListAntd.Item>
+              </div>
+              )
+          } else {
+            return (
+              <ListAntd.Item>
+              <StyledCardTimeline>
+                <StyledTimelineCardUserContainer>
+                  {book.creator.image_url ?
+                    <StyledTimelineCardAvatar> </StyledTimelineCardAvatar> :
+                    <StyledTimelineCardAvatar> {book.creator.name[0].toUpperCase()} </StyledTimelineCardAvatar>}
+                  <StyledTimelineCardUser>{book.creator.name}</StyledTimelineCardUser>
+                </StyledTimelineCardUserContainer>
+                <StyledTimelineCardTopText>
+                  <StyledTimelineAuthor>Este livro foi escrito por: {book.author}</StyledTimelineAuthor>
+                  {book.grade ? <div>Avaliação: {book.grade}/10</div> : <div>Não Avaliado</div>}
+                </StyledTimelineCardTopText>
+                <StyledTimelineImg src={book.image_url} />
+                <StyledTimelineCardTitle>
+                  <h2>
+                    {book.title}
+                  </h2>
+                </StyledTimelineCardTitle>
+              {book.categories ? <StyledTimelineCardSubtitle> Categoria: {book.categories} </StyledTimelineCardSubtitle> :
+                <StyledTimelineCardSubtitle> Categoria: Não informado </StyledTimelineCardSubtitle>}
+
+                  <Popover placement="right" content={content(book)} trigger="click">
+                    <StyledTimelineButton onClick={() => console.log(book)}> Adicionar</StyledTimelineButton>
+                  </Popover>
+              </StyledCardTimeline>
+              </ListAntd.Item>
+              )
+          }
+        })}
+          
       </div>
-    </Div >
+    </Div>
   );
 };
-
-export default Timeline;

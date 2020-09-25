@@ -100,9 +100,14 @@ export const setBooks = (books) => ({
 
 export const requestBooks = () => (dispatch, getState) => {
   const { session } = getState()
+
   axios
     .get(`https://ka-users-api.herokuapp.com/book_reviews`,
-      { headers: { Authorization: session.token } }
+      { 
+        headers: { 
+          Authorization: session.token 
+        }
+      }
     )
     .then(resp => {
       dispatch(setBooks(resp.data));

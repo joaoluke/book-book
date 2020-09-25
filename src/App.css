@@ -36,12 +36,26 @@ header {
   border-left-color: transparent  !important;
  }
 
+<<<<<<< HEAD
+.ant-popover-arrow {
+  border-top-color: #aaa;
+  border-right-color: #aaa;
+  border-bottom-color: #aaa;
+  border-left-color: #aaa;
+}
+
+.ant-btn .ant-btn-primary .ant-btn-lg .ant-input-search-button {
+  background-color: #4951EC;
+}
+
+=======
  .ant-popover-placement-right > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-rightTop > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-rightBottom > .ant-popover-content > .ant-popover-arrow {
   border-top-color: transparent !important;
   border-right-color: transparent  !important;
   border-bottom-color: #aaa  !important;
   border-left-color: #aaa  !important;
  }
+>>>>>>> develop
 
  .ant-popover-placement-bottom > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomLeft > .ant-popover-content > .ant-popover-arrow, .ant-popover-placement-bottomRight > .ant-popover-content > .ant-popover-arrow {
   border-top-color: transparent !important;
